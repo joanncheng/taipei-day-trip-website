@@ -3,6 +3,13 @@ from flask import *
 app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
 app.config["TEMPLATES_AUTO_RELOAD"] = True
+app.config["JSON_SORT_KEYS"] = False
+
+from api.routes import api_bp
+from models.database import models_bp
+
+app.register_blueprint(api_bp)
+app.register_blueprint(models_bp)
 
 # Pages
 @app.route("/")
@@ -25,4 +32,4 @@ def thankyou():
     return render_template("thankyou.html")
 
 
-app.run(port=3000)
+app.run(debug=True, port=3000)
