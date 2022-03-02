@@ -4,6 +4,12 @@ from models.database import mydbpool
 
 api_bp = Blueprint("api_bp", __name__, url_prefix="/api")
 
+
+@api_bp.errorhandler(500)
+def interanl_server_error(e):
+    return jsonify(error=True, message="Internal Server Error"), 500
+
+
 api = Api(api_bp)
 
 
@@ -30,7 +36,7 @@ class Attractions(Resource):
 
         attractions = mydbpool.paginate(per_page, offset, keyword)
 
-        if attractions == False:
+        if attractions is False:
             res = {"error": True, "message": "Something went wrong, please try again later."}
             return res, 500
 
@@ -45,11 +51,11 @@ class Attraction(Resource):
     def get(self, attractionId):
         attraction = mydbpool.query("SELECT * FROM attractions WHERE id = %s", [attractionId])
 
-        if attraction == None:
+        if attraction is None:
             res = {"error": True, "message": "No attraction found with that ID"}
             return res, 400
 
-        if attraction == False:
+        if attraction is False:
             res = {"error": True, "message": "Something went wrong, please try again later."}
             return res, 500
 
