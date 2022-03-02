@@ -65,6 +65,7 @@ class Database:
 
         except Error as e:
             print("Error occured: ", e)
+            return False
 
         finally:
             if cnx.is_connected():
