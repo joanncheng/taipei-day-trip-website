@@ -17,17 +17,15 @@ class Database:
             database="taipei_day_trip_website",
         )
 
-    def get_number_of_rows(self, keyword=None):
+    def get_attraction(self, attraction_id):
         try:
             cnx = self.cnxpool.get_connection()
             cursor = cnx.cursor(dictionary=True)
 
-            if not keyword:
-                cursor.execute("SELECT * FROM attractions")
-            else:
-                cursor.execute("SELECT * FROM attractions WHERE name LIKE %s", ("%" + keyword + "%",))
-            cursor.fetchall()
-            return cursor.rowcount
+            cursor.execute("SELECT * FROM attractions WHERE id = %s", (attraction_id,))
+
+            record = cursor.fetchone()
+            return record
 
         except Error as e:
             print("Error occured: ", e)
@@ -38,55 +36,40 @@ class Database:
                 cursor.close()
                 cnx.close()
 
-    def paginate(self, limit, offset, keyword=None):
+    def get_pagination(self, per_page, page, keyword):
         try:
             cnx = self.cnxpool.get_connection()
             cursor = cnx.cursor(dictionary=True)
 
             if not keyword:
+                cursor.execute("SELECT count(*) FROM attractions;")
+            else:
+                cursor.execute("SELECT count(*) FROM attractions WHERE name LIKE %s;", ("%" + keyword + "%",))
+
+            count = cursor.fetchall()
+            pages = count[-1]["count(*)"] // per_page
+            offset = page * per_page
+
+            if not keyword:
                 cursor.execute(
-                    "SELECT * FROM attractions ORDER BY id LIMIT %s OFFSET %s",
+                    "SELECT * FROM attractions ORDER BY id LIMIT %s OFFSET %s;",
                     (
-                        limit,
+                        per_page,
                         offset,
                     ),
                 )
             else:
                 cursor.execute(
-                    "SELECT * FROM attractions WHERE name LIKE %s ORDER BY id LIMIT %s OFFSET %s",
+                    "SELECT * FROM attractions WHERE name LIKE %s ORDER BY id LIMIT %s OFFSET %s;",
                     (
                         "%" + keyword + "%",
-                        limit,
+                        per_page,
                         offset,
                     ),
                 )
-            result = cursor.fetchall()
-            return result
 
-        except Error as e:
-            print("Error occured: ", e)
-            return False
-
-        finally:
-            if cnx.is_connected():
-                cursor.close()
-                cnx.close()
-
-    def query(self, sql, params=None, fetch_data="one"):
-        try:
-            cnx = self.cnxpool.get_connection()
-            cursor = cnx.cursor(dictionary=True)
-
-            if not params:
-                cursor.execute(sql)
-                result = cursor.fetchall()
-            else:
-                cursor.execute(sql, tuple(params))
-                if fetch_data == "one":
-                    result = cursor.fetchone()
-                elif fetch_data == "all":
-                    result = cursor.fetchall()
-            return result
+            attractions = cursor.fetchall()
+            return {"pages": pages, "attractions": attractions}
 
         except Error as e:
             print("Error occured: ", e)
