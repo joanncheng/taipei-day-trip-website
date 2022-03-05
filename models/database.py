@@ -27,7 +27,7 @@ class Database:
             record = cursor.fetchone()
             return record
 
-        except Error as e:
+        except Exception as e:
             print("Error occured: ", e)
             return False
 
@@ -47,7 +47,7 @@ class Database:
                 cursor.execute("SELECT count(*) FROM attractions WHERE name LIKE %s;", ("%" + keyword + "%",))
 
             count = cursor.fetchall()
-            pages = count[-1]["count(*)"] // per_page
+            pages = count[0]["count(*)"] // per_page
             offset = page * per_page
 
             if not keyword:
@@ -71,7 +71,7 @@ class Database:
             attractions = cursor.fetchall()
             return {"pages": pages, "attractions": attractions}
 
-        except Error as e:
+        except Exception as e:
             print("Error occured: ", e)
             return False
 
