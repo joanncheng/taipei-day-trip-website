@@ -41,20 +41,13 @@ class Database:
             cnx = self.cnxpool.get_connection()
             cursor = cnx.cursor(dictionary=True)
 
-            if not keyword:
-                cursor.execute("SELECT count(*) FROM attractions;")
-            else:
-                cursor.execute("SELECT count(*) FROM attractions WHERE name LIKE %s;", ("%" + keyword + "%",))
-
-            count = cursor.fetchall()
-            pages = count[0]["count(*)"] // per_page
             offset = page * per_page
 
             if not keyword:
                 cursor.execute(
                     "SELECT * FROM attractions ORDER BY id LIMIT %s OFFSET %s;",
                     (
-                        per_page,
+                        per_page + 1,
                         offset,
                     ),
                 )
@@ -63,13 +56,13 @@ class Database:
                     "SELECT * FROM attractions WHERE name LIKE %s ORDER BY id LIMIT %s OFFSET %s;",
                     (
                         "%" + keyword + "%",
-                        per_page,
+                        per_page + 1,
                         offset,
                     ),
                 )
 
             attractions = cursor.fetchall()
-            return {"pages": pages, "attractions": attractions}
+            return attractions
 
         except Exception as e:
             print("Error occured: ", e)

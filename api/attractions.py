@@ -1,3 +1,4 @@
+import re
 from flask import request, jsonify
 from flask_restful import Resource
 from models.database import mydbpool
@@ -26,9 +27,12 @@ class Attractions(Resource):
         if result is False:
             return handle_error("Something went wrong, please try again later.", 500)
 
-        attractions = result["attractions"]
-        pages = result["pages"]
-        next_page = page + 1 if page + 1 <= pages else None
+        if len(result) == per_page + 1:
+            next_page = page + 1
+            attractions = result[:-1]
+        else:
+            next_page = None
+            attractions = result
 
         for attraction in attractions:
             format_attraction_data(attraction)
