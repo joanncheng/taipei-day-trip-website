@@ -27,17 +27,10 @@ class Attractions(Resource):
         if result is False:
             return handle_error("Something went wrong, please try again later.", 500)
 
-        if len(result) == per_page + 1:
-            next_page = page + 1
-            attractions = result[:-1]
-        else:
-            next_page = None
-            attractions = result
-
-        for attraction in attractions:
+        for attraction in result["attractions"]:
             format_attraction_data(attraction)
 
-        res = {"nextPage": next_page, "data": attractions}
+        res = {"nextPage": result["next_page"], "data": result["attractions"]}
         return jsonify(res)
 
 

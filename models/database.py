@@ -61,8 +61,16 @@ class Database:
                     ),
                 )
 
-            attractions = cursor.fetchall()
-            return attractions
+            record = cursor.fetchall()
+
+            if len(record) == per_page + 1:
+                next_page = page + 1
+                attractions = record[:-1]
+            else:
+                next_page = None
+                attractions = record
+
+            return {"next_page": next_page, "attractions": attractions}
 
         except Exception as e:
             print("Error occured: ", e)
