@@ -2,6 +2,8 @@ import * as model from "./model.js";
 import attractionsView from "./attractionsView.js";
 import searchView from "./searchView.js";
 
+// let scrollDebounce = true;
+
 const showAttractions = async () => {
   try {
     await model.loadAttractions(model.state.nextPage);
@@ -12,25 +14,22 @@ const showAttractions = async () => {
   }
 };
 
-let scrollDebounce = true;
-
 const controlLoadMore = async () => {
   try {
-    if (scrollDebounce) {
+    if (attractionsView.scrollDebounce) {
       const { scrollTop, scrollHeight, clientHeight } =
         document.documentElement;
 
       if (scrollTop + clientHeight >= scrollHeight) {
-        scrollDebounce = false;
+        attractionsView.scrollDebounce = false;
         attractionsView.showLoading();
         await model.loadAttractions(model.state.nextPage);
+        attractionsView.render(model.state.attractions);
+
         if (!model.state.nextPage) {
           attractionsView.removeHandlerRender(controlLoadMore);
         }
-
-        attractionsView.render(model.state.attractions);
       }
-      scrollDebounce = true;
     }
   } catch (err) {
     attractionsView.renderError(err);
@@ -45,7 +44,12 @@ const controlSearchResults = async () => {
 
     attractionsView.clear();
     attractionsView.render(model.state.attractions);
-    attractionsView.addHandlerRender(controlLoadMore);
+
+    if (model.state.nextPage) {
+      attractionsView.addHandlerRender(controlLoadMore);
+    } else {
+      attractionsView.removeHandlerRender(controlLoadMore);
+    }
   } catch (err) {
     attractionsView.renderError(err);
   }

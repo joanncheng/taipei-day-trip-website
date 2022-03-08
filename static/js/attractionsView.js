@@ -1,5 +1,6 @@
 class AttractionsView {
   _parentElement = document.querySelector(".attractions-container");
+  scrollDebounce;
 
   render(data) {
     if (!data || (Array.isArray(data) && data.length === 0)) {
@@ -11,6 +12,7 @@ class AttractionsView {
       const markup = this._generateMarkup(el);
       this._parentElement.insertAdjacentHTML("beforeend", markup);
     });
+    this.scrollDebounce = true;
   }
 
   _generateMarkup(el) {
