@@ -10,6 +10,7 @@ export const loadAttractions = async (page) => {
   try {
     const data = await getJSON(`${API_URL}/attractions?page=${page}`);
 
+    state.nextPage = data.nextPage;
     state.attractions = data.data.map((attraction) => {
       return {
         name: attraction.name,
@@ -18,7 +19,6 @@ export const loadAttractions = async (page) => {
         images: attraction.images,
       };
     });
-    state.nextPage = data.nextPage;
   } catch (err) {
     throw err;
   }
@@ -29,7 +29,14 @@ export const loadSearchResults = async (query) => {
     const data = await getJSON(`${API_URL}/attractions?keyword=${query}`);
 
     state.nextPage = data.nextPage;
-    state.attractions = data.data;
+    state.attractions = data.data.map((attraction) => {
+      return {
+        name: attraction.name,
+        category: attraction.category,
+        mrt: attraction.mrt ? attraction.mrt : "無",
+        images: attraction.images,
+      };
+    });
   } catch (err) {
     throw err;
   }
