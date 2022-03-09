@@ -339,7 +339,7 @@ main {
 
 @media (max-width: 44em) {
   .section-attractions {
-    min-height: 23vh;
+    min-height: 27vh;
   }
 
   .attractions-container {

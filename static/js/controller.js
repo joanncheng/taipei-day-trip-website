@@ -24,7 +24,9 @@ const controlLoadMore = async (entries, observer) => {
 
     attractionsView.isLoading = true;
     attractionsView.showLoading();
-    await model.loadAttractions(model.state.nextPage);
+
+    await model.loadAttractions(model.state.nextPage, model.state.query);
+
     attractionsView.render(model.state.attractions);
 
     if (!model.state.nextPage) {
@@ -40,11 +42,10 @@ const controlSearchResults = async () => {
     const query = searchView.getQuery();
     if (!query) return;
 
-    await model.loadSearchResults(query);
+    await model.loadAttractions(0, query);
 
     attractionsView.clear();
     attractionsView.render(model.state.attractions);
-
     if (model.state.nextPage) {
       attractionsView.addHandlerRender(controlLoadMore);
     }
