@@ -17,8 +17,8 @@ class AttractionsView {
     return `
     <div class="attraction">
       <img
-        data-src="${el.images[0]}"
-        class="attraction__img lazy-img"
+        src="${el.images[0]}"
+        class="attraction__img"
         alt="${el.name}"
       />
       <div class="attraction__content">
