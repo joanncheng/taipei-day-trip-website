@@ -2,8 +2,6 @@ import * as model from "./model.js";
 import attractionsView from "./attractionsView.js";
 import searchView from "./searchView.js";
 
-// let scrollDebounce = true;
-
 const showAttractions = async () => {
   try {
     await model.loadAttractions(model.state.nextPage);
@@ -14,22 +12,23 @@ const showAttractions = async () => {
   }
 };
 
-const controlLoadMore = async () => {
+const controlLoadMore = async (entries, observer) => {
   try {
-    if (attractionsView.scrollDebounce) {
-      const { scrollTop, scrollHeight, clientHeight } =
-        document.documentElement;
+    const [entry] = entries;
+    if (
+      !entry.isIntersecting ||
+      !model.state.nextPage ||
+      attractionsView.isLoading
+    )
+      return;
 
-      if (scrollTop + clientHeight >= scrollHeight) {
-        attractionsView.scrollDebounce = false;
-        attractionsView.showLoading();
-        await model.loadAttractions(model.state.nextPage);
-        attractionsView.render(model.state.attractions);
+    attractionsView.isLoading = true;
+    attractionsView.showLoading();
+    await model.loadAttractions(model.state.nextPage);
+    attractionsView.render(model.state.attractions);
 
-        if (!model.state.nextPage) {
-          attractionsView.removeHandlerRender(controlLoadMore);
-        }
-      }
+    if (!model.state.nextPage) {
+      observer.unobserve(entry.target);
     }
   } catch (err) {
     attractionsView.renderError(err);
@@ -39,6 +38,7 @@ const controlLoadMore = async () => {
 const controlSearchResults = async () => {
   try {
     const query = searchView.getQuery();
+    if (!query) return;
 
     await model.loadSearchResults(query);
 
@@ -47,8 +47,6 @@ const controlSearchResults = async () => {
 
     if (model.state.nextPage) {
       attractionsView.addHandlerRender(controlLoadMore);
-    } else {
-      attractionsView.removeHandlerRender(controlLoadMore);
     }
   } catch (err) {
     attractionsView.renderError(err);

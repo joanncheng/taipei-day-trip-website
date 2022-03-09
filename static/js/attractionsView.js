@@ -1,26 +1,24 @@
 class AttractionsView {
   _parentElement = document.querySelector(".attractions-container");
-  scrollDebounce;
+  isLoading = true;
 
   render(data) {
-    if (!data || (Array.isArray(data) && data.length === 0)) {
+    if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
-    }
-
     this.hideLoading();
     data.forEach((el) => {
       const markup = this._generateMarkup(el);
       this._parentElement.insertAdjacentHTML("beforeend", markup);
     });
-    this.scrollDebounce = true;
+    this.isLoading = false;
   }
 
   _generateMarkup(el) {
     return `
     <div class="attraction">
       <img
-        src="${el.images[0]}"
-        class="attraction__img"
+        data-src="${el.images[0]}"
+        class="attraction__img lazy-img"
         alt="${el.name}"
       />
       <div class="attraction__content">
@@ -50,11 +48,12 @@ class AttractionsView {
   }
 
   addHandlerRender(handler) {
-    window.addEventListener("scroll", handler);
-  }
-
-  removeHandlerRender(handler) {
-    window.removeEventListener("scroll", handler);
+    const footer = document.querySelector(".footer");
+    const footerObserver = new IntersectionObserver(handler, {
+      root: null,
+      threshold: 0,
+    });
+    footerObserver.observe(footer);
   }
 
   showLoading() {
