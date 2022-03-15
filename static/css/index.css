@@ -35,6 +35,8 @@ body {
   font-weight: 400;
   color: var(--color-secondary);
   overflow-x: hidden;
+  opacity: 0;
+  transition: 300ms opacity ease-out;
 }
 
 a {

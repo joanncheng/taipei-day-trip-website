@@ -11,6 +11,8 @@ const showAttraction = async () => {
     attractionView.render(model.state.attraction);
   } catch (err) {
     throw err;
+  } finally {
+    document.querySelector("body").style.opacity = 1;
   }
 };
 
