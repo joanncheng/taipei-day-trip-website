@@ -1,0 +1,10 @@
+{% extends "base.html" %} {% block script%}
+<script
+  defer
+  type="module"
+  src="{{ url_for('static',filename='js/attractionController.js') }}"
+></script>
+{% endblock %} {% block section %}
+<hr class="separator sticky" />
+<div class="attraction-profile main-container"></div>
+{% endblock %}

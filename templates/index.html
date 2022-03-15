@@ -1,37 +1,17 @@
-{% extends "base.html" %} {% block body %}
+{% extends "base.html" %} {% block script%}
+<script
+  defer
+  type="module"
+  src="{{ url_for('static',filename='js/attractionsController.js') }}"
+></script>
+{% endblock %} {% block section %}
 
-<header class="header sticky">
-  <nav class="nav main-container">
-    <a href="#" class="nav__logo" id="logo">台北一日遊</a>
-    <ul class="nav__links">
-      <li class="nav__item">
-        <a class="nav__link" href="/booking">預定行程</a>
-      </li>
-      <li class="nav__item">
-        <a class="nav__link nav__link-btn btn--show-modal" href="#"
-          >登入/註冊</a
-        >
-      </li>
-    </ul>
-  </nav>
-</header>
-
-<main>
-  <section class="section-hero">
-    <div class="hero-img-box">
-      <img
-        src="../static/img/welcome 1.png"
-        class="hero__img"
-        alt="Welcome image"
-      />
-    </div>
-  </section>
-
+<section class="section-hero">
   <div class="main-container">
     <div class="slogan-container">
       <h1 class="slogan__header">輕鬆享受台北一日悠閒</h1>
       <p class="slogan__description">探索每個角落，體驗城市的深度旅遊行程</p>
-      <form class="search">
+      <form class="search-bar">
         <input
           type="text"
           placeholder="輸入景點名稱查詢"
@@ -47,41 +27,17 @@
       </form>
     </div>
   </div>
+</section>
 
-  <section class="section-attractions">
-    <div class="main-container">
-      <div class="attractions-container grid grid--4-cols">
-        <!-- <div class="error">
-          <ion-icon name="alert" class="error__icon"></ion-icon>
-          <p class="error__message">
-            
-          </p>
-        </div> -->
-        <!-- <div class="attraction">
-          <img
-            src=""
-            class="attraction__img"
-            alt="平安鐘"
-          />
-          <div class="attraction__content">
-            <p class="attraction__title">平安鐘</p>
-            <ul class="attraction__attributes">
-              <li class="attraction__attribute">忠孝復興</li>
-              <li class="attraction__attribute">公共藝術</li>
-            </ul>
-          </div>
-        </div> -->
-      </div>
-      <div class="loading">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-      </div>
+<section class="section-attractions">
+  <div class="main-container">
+    <div class="attractions-container grid grid--4-cols"></div>
+    <div class="loading">
+      <div class="dot dot--bounce"></div>
+      <div class="dot dot--bounce"></div>
+      <div class="dot dot--bounce"></div>
     </div>
-  </section>
-</main>
-<footer class="footer">
-  <p class="copyright">COPYRIGHT &copy; 2021 台北一日遊</p>
-</footer>
+  </div>
+</section>
 
 {% endblock %}

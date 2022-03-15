@@ -1,11 +1,11 @@
-import * as model from "./model.js";
+import * as model from "./attractionsModel.js";
 import attractionsView from "./attractionsView.js";
 import searchView from "./searchView.js";
+import modalView from "./modalView.js";
 
 const showAttractions = async () => {
   try {
     await model.loadAttractions(model.state.nextPage);
-
     attractionsView.render(model.state.attractions);
   } catch (err) {
     attractionsView.renderError(err);
@@ -58,6 +58,9 @@ const init = () => {
   showAttractions();
   attractionsView.addHandlerRender(controlLoadMore);
   searchView.addHandlerSearch(controlSearchResults);
+  modalView.handleShowSigninModal();
+  modalView.handleShowSignupModal();
+  modalView.handleCloseModal();
 };
 
 init();

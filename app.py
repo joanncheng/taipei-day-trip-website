@@ -5,11 +5,13 @@ app.config["JSON_AS_ASCII"] = False
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config["JSON_SORT_KEYS"] = False
 
+# Register blueprints
 from api.routes import api_bp
 from models.database import models_bp
 
 app.register_blueprint(api_bp)
 app.register_blueprint(models_bp)
+
 
 # Pages
 @app.route("/")

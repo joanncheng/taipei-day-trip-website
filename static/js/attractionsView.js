@@ -15,20 +15,25 @@ class AttractionsView {
 
   _generateMarkup(el) {
     return `
-    <div class="attraction">
-      <img
-        src="${el.images[0]}"
-        class="attraction__img"
-        alt="${el.name}"
-      />
-      <div class="attraction__content">
-        <p class="attraction__title">${el.name}</p>
-        <ul class="attraction__attributes">
-          <li class="attraction__attribute">${el.mrt}</li>
-          <li class="attraction__attribute">${el.category}</li>
-        </ul>
+    <a href="/attraction/${el.id}">
+      <div class="attraction" data-id="${el.id}">
+        <div class="attraction__img-box">
+          <img
+          src="${el.images[0]}"
+          class="attraction__img"
+          alt="${el.name}"
+          
+          />
+        </div>      
+        <div class="attraction__content">
+          <p class="attraction__title">${el.name}</p>
+          <ul class="attraction__attributes">
+            <li class="attraction__attribute">${el.mrt}</li>
+            <li class="attraction__attribute">${el.category}</li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </a>
   `;
   }
 
