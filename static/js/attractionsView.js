@@ -1,11 +1,11 @@
 class AttractionsView {
   _parentElement = document.querySelector(".attractions-container");
+  _subLoader = document.querySelector(".sub-loader");
   isLoading = true;
 
   render(data) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
-    this.hideLoading();
     data.forEach((el) => {
       const markup = this._generateMarkup(el);
       this._parentElement.insertAdjacentHTML("beforeend", markup);
@@ -61,12 +61,20 @@ class AttractionsView {
     footerObserver.observe(footer);
   }
 
+  removeLoadingMessage() {
+    document.querySelector(".loader").style.display = "none";
+  }
+
   showLoading() {
-    document.querySelector(".loading").classList.add("show");
+    this._subLoader.classList.add("show");
   }
 
   hideLoading() {
-    document.querySelector(".loading").classList.remove("show");
+    this._subLoader.classList.remove("show");
+  }
+
+  removeLoading() {
+    this._subLoader.style.display = "none";
   }
 }
 

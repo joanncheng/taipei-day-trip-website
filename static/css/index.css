@@ -35,8 +35,6 @@ body {
   font-weight: 400;
   color: var(--color-secondary);
   overflow-x: hidden;
-  opacity: 0;
-  transition: 300ms opacity ease-out;
 }
 
 a {
@@ -76,17 +74,28 @@ ul {
   cursor: pointer;
 }
 
-.loading {
-  opacity: 0;
-  display: flex;
-  position: fixed;
-  bottom: 120px;
-  left: 50%;
-  transform: translateX(-50%);
-  transition: opacity 0.3s ease-in;
+.loader {
+  margin: 0 auto;
+  margin-top: 90px;
+  width: fit-content;
 }
 
-.loading.show {
+.loading {
+  display: flex;
+  justify-content: center;
+  transition: opacity 0.3s ease-in;
+  margin-top: 20px;
+}
+
+.sub-loader {
+  width: fit-content;
+  align-items: center;
+  opacity: 0;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+
+.sub-loader.show {
   opacity: 1;
 }
 
@@ -133,7 +142,6 @@ ul {
   transform: translateX(-50%);
   text-align: center;
   width: 340px;
-  /* height: 27.5rem; */
   background-color: #ffffff;
   box-shadow: 0 4px 60px #aaaaaa;
   border-radius: 6px;

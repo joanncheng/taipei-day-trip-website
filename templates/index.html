@@ -31,13 +31,21 @@
 
 <section class="section-attractions">
   <div class="main-container">
-    <div class="attractions-container grid grid--4-cols"></div>
-    <div class="loading">
-      <div class="dot dot--bounce"></div>
-      <div class="dot dot--bounce"></div>
-      <div class="dot dot--bounce"></div>
+    <div class="loader">
+      <p>Please wait for a bit...</p>
+      <div class="loading">
+        <div class="dot dot--bounce"></div>
+        <div class="dot dot--bounce"></div>
+        <div class="dot dot--bounce"></div>
+      </div>
     </div>
+    <div class="attractions-container grid grid--4-cols"></div>
   </div>
 </section>
+<div class="loading sub-loader">
+  <div class="dot dot--bounce"></div>
+  <div class="dot dot--bounce"></div>
+  <div class="dot dot--bounce"></div>
+</div>
 
 {% endblock %}

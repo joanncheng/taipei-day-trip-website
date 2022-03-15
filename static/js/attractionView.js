@@ -164,6 +164,10 @@ class AttractionView {
     this.clear();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
+
+  removeLoadingMessage() {
+    document.querySelector(".loader").style.display = "none";
+  }
 }
 
 export default new AttractionView();

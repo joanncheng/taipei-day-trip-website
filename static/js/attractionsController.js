@@ -6,11 +6,10 @@ import modalView from "./modalView.js";
 const showAttractions = async () => {
   try {
     await model.loadAttractions(model.state.nextPage);
+    attractionsView.removeLoadingMessage();
     attractionsView.render(model.state.attractions);
   } catch (err) {
     attractionsView.renderError(err);
-  } finally {
-    document.querySelector("body").style.opacity = 1;
   }
 };
 
@@ -28,11 +27,13 @@ const controlLoadMore = async (entries, observer) => {
     attractionsView.showLoading();
 
     await model.loadAttractions(model.state.nextPage, model.state.query);
+    attractionsView.hideLoading();
 
     attractionsView.render(model.state.attractions);
 
     if (!model.state.nextPage) {
       observer.unobserve(entry.target);
+      attractionsView.removeLoading();
     }
   } catch (err) {
     attractionsView.renderError(err);

@@ -8,11 +8,10 @@ const showAttraction = async () => {
     const pathname = window.location.pathname;
     const id = pathname.slice(pathname.lastIndexOf("/") + 1);
     await model.loadAttraction(id);
+    attractionView.removeLoadingMessage();
     attractionView.render(model.state.attraction);
   } catch (err) {
     throw err;
-  } finally {
-    document.querySelector("body").style.opacity = 1;
   }
 };
 
