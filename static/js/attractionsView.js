@@ -1,11 +1,11 @@
 class AttractionsView {
   _parentElement = document.querySelector(".attractions-container");
+  _subLoader = document.querySelector(".sub-loader");
   isLoading = true;
 
   render(data) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
-    this.hideLoading();
     data.forEach((el) => {
       const markup = this._generateMarkup(el);
       this._parentElement.insertAdjacentHTML("beforeend", markup);
@@ -15,20 +15,25 @@ class AttractionsView {
 
   _generateMarkup(el) {
     return `
-    <div class="attraction">
-      <img
-        src="${el.images[0]}"
-        class="attraction__img"
-        alt="${el.name}"
-      />
-      <div class="attraction__content">
-        <p class="attraction__title">${el.name}</p>
-        <ul class="attraction__attributes">
-          <li class="attraction__attribute">${el.mrt}</li>
-          <li class="attraction__attribute">${el.category}</li>
-        </ul>
+    <a href="/attraction/${el.id}">
+      <div class="attraction" data-id="${el.id}">
+        <div class="attraction__img-box">
+          <img
+          src="${el.images[0]}"
+          class="attraction__img"
+          alt="${el.name}"
+          
+          />
+        </div>      
+        <div class="attraction__content">
+          <p class="attraction__title">${el.name}</p>
+          <ul class="attraction__attributes">
+            <li class="attraction__attribute">${el.mrt}</li>
+            <li class="attraction__attribute">${el.category}</li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </a>
   `;
   }
 
@@ -56,12 +61,20 @@ class AttractionsView {
     footerObserver.observe(footer);
   }
 
+  removeLoadingMessage() {
+    document.querySelector(".loader").style.display = "none";
+  }
+
   showLoading() {
-    document.querySelector(".loading").classList.add("show");
+    this._subLoader.classList.add("show");
   }
 
   hideLoading() {
-    document.querySelector(".loading").classList.remove("show");
+    this._subLoader.classList.remove("show");
+  }
+
+  removeLoading() {
+    this._subLoader.style.display = "none";
   }
 }
 

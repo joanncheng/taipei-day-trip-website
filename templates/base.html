@@ -8,9 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Work+Sans:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap"
       rel="stylesheet"
     />
+
     <script
       type="module"
       src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"
@@ -22,16 +23,103 @@
 
     <link
       rel="stylesheet"
-      href="{{ url_for('static',filename='style.css') }}"
+      href="{{ url_for('static',filename='css/index.css') }}"
     />
-    <script
-      defer
-      type="module"
-      src="{{ url_for('static', filename='js/controller.js') }}"
-    ></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='css/attraction.css') }}"
+    />
+
+    {% block script%} {% endblock %}
+
     <title>台北一日遊</title>
+    <meta
+      name="description"
+      content="輕鬆享受台北一日悠閒，探索每個角落，體驗城市的深度旅遊行程"
+    />
   </head>
   <body>
-    {% block body %}{% endblock %}
+    <div class="overlay hidden"></div>
+    <header class="header sticky">
+      <nav class="nav main-container">
+        <a href="/" class="nav__logo" id="logo">台北一日遊</a>
+        <ul class="nav__links">
+          <li class="nav__item">
+            <a class="nav__link" href="/booking">預定行程</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link nav__link-btn btn--show-signin" href="#"
+              >登入&sol;註冊</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="popup signin hidden">
+        <button class="btn btn--close-modal">
+          <img
+            src="../static/img/icon/close.svg"
+            class="close__icon"
+            alt="Close icon"
+          />
+        </button>
+        <h2 class="popup__header">登入會員帳號</h2>
+        <form class="form-signin form">
+          <input
+            type="email"
+            placeholder="輸入電子信箱"
+            class="form__field"
+            required
+          />
+          <input
+            type="password"
+            placeholder="輸入密碼"
+            class="form__field"
+            required
+          />
+          <button class="btn form__btn">登入帳戶</button>
+        </form>
+        <a class="popup__link btn--show-signup">還沒有帳戶？點此註冊</a>
+      </div>
+
+      <div class="popup signup hidden">
+        <button class="btn btn--close-modal">
+          <img
+            src="../static/img/icon/close.svg"
+            class="close__icon"
+            alt="Close icon"
+          />
+        </button>
+        <h2 class="popup__header">註冊會員帳號</h2>
+        <form class="form-signin form">
+          <input
+            type="text"
+            placeholder="輸入姓名"
+            class="form__field"
+            required
+          />
+          <input
+            type="email"
+            placeholder="輸入電子郵件"
+            class="form__field"
+            required
+          />
+          <input
+            type="password"
+            placeholder="輸入密碼"
+            class="form__field"
+            required
+          />
+          <button class="btn form__btn">註冊新帳戶</button>
+        </form>
+        <a class="popup__link btn--show-signin">已經有帳戶了？點此登入</a>
+      </div>
+      {% block section %}{% endblock %}
+    </main>
+    <footer class="footer">
+      <p class="copyright">COPYRIGHT &copy; 2021 台北一日遊</p>
+    </footer>
   </body>
 </html>

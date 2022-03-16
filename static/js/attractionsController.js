@@ -1,11 +1,12 @@
-import * as model from "./model.js";
+import * as model from "./attractionsModel.js";
 import attractionsView from "./attractionsView.js";
 import searchView from "./searchView.js";
+import modalView from "./modalView.js";
 
 const showAttractions = async () => {
   try {
     await model.loadAttractions(model.state.nextPage);
-
+    attractionsView.removeLoadingMessage();
     attractionsView.render(model.state.attractions);
   } catch (err) {
     attractionsView.renderError(err);
@@ -26,11 +27,13 @@ const controlLoadMore = async (entries, observer) => {
     attractionsView.showLoading();
 
     await model.loadAttractions(model.state.nextPage, model.state.query);
+    attractionsView.hideLoading();
 
     attractionsView.render(model.state.attractions);
 
     if (!model.state.nextPage) {
       observer.unobserve(entry.target);
+      attractionsView.removeLoading();
     }
   } catch (err) {
     attractionsView.renderError(err);
@@ -58,6 +61,9 @@ const init = () => {
   showAttractions();
   attractionsView.addHandlerRender(controlLoadMore);
   searchView.addHandlerSearch(controlSearchResults);
+  modalView.handleShowSigninModal();
+  modalView.handleShowSignupModal();
+  modalView.handleCloseModal();
 };
 
 init();
