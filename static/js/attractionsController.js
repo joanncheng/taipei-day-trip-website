@@ -57,9 +57,22 @@ const controlSearchResults = async () => {
   }
 };
 
+const controlPagetop = () => {
+  const btnPagetop = document.querySelector(".pagetop");
+  if (
+    document.body.scrollTop > 100 ||
+    document.documentElement.scrollTop > 100
+  ) {
+    btnPagetop.style.display = "block";
+  } else {
+    btnPagetop.style.display = "none";
+  }
+};
+
 const init = () => {
   showAttractions();
   attractionsView.addHandlerRender(controlLoadMore);
+  attractionsView.addHandlerPagetop(controlPagetop);
   searchView.addHandlerSearch(controlSearchResults);
   modalView.handleShowSigninModal();
   modalView.handleShowSignupModal();
