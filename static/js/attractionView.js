@@ -109,7 +109,7 @@ class AttractionView {
         </div>
       </section>
       <hr class="horizontal-line" />
-      <section class="section-infos">
+      <section class="section-infos grid grid--1-cols">
         <p class="info__description">
           ${data.description}
         </p>
@@ -130,23 +130,17 @@ class AttractionView {
   addHandlerSlide(handler) {
     const btns = document.querySelectorAll(".slider__btn");
 
-    btns.forEach((btn) =>
-      btn.addEventListener("click", (e) => {
-        handler(e);
-      })
-    );
+    btns.forEach((btn) => btn.addEventListener("click", handler));
   }
 
   addHandlerSlideDot(handler) {
-    document.querySelector(".slider__dots").addEventListener("click", (e) => {
-      handler(e);
-    });
+    document.querySelector(".slider__dots").addEventListener("click", handler);
   }
 
   addHandlerChangePrice(handler) {
-    document.querySelector(".booking__time").addEventListener("change", (e) => {
-      handler(e);
-    });
+    document
+      .querySelector(".booking__time")
+      .addEventListener("change", handler);
   }
 
   clear() {

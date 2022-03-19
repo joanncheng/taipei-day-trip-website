@@ -14,14 +14,6 @@
   min-height: 300px;
 }
 
-.separator.sticky {
-  position: fixed;
-  top: 54px;
-  width: 100%;
-  z-index: 10;
-  border: 1px solid var(--color-secondary-lighter);
-}
-
 /* SLIDER */
 
 .slider {
@@ -123,7 +115,7 @@
   width: 600px;
   height: 302px;
   border-radius: 5px;
-  background-color: var(--color-secondary-lighter);
+  background-color: var(--color-gray-300);
 }
 
 .booking__header,
@@ -184,7 +176,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .booking__radio:checked {
-  background-color: var(--color-primary);
+  background-color: var(--color-cyan-800);
   border: 2px solid #ffffff;
 }
 
@@ -200,14 +192,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* SECTION-INFOS */
 /**************************/
 
-.horizontal-line {
-  margin: 40px auto;
-  border: 1px solid var(--color-secondary-lighter);
-}
-
 .section-infos {
-  display: grid;
-  grid-template-columns: 1fr;
   gap: 20px;
   padding: 0 10px;
   margin-bottom: 120px;

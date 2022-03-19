@@ -16,7 +16,7 @@ class AttractionsView {
   _generateMarkup(el) {
     return `
     <a href="/attraction/${el.id}">
-      <div class="attraction" data-id="${el.id}">
+      <div class="attraction grid grid--1-col" data-id="${el.id}">
         <div class="attraction__img-box">
           <img
           src="${el.images[0]}"
@@ -63,8 +63,12 @@ class AttractionsView {
     footerObserver.observe(footer);
   }
 
-  addHandlerPagetop(handler) {
+  addHandlerShowPagetopBtn(handler) {
     window.onscroll = handler;
+  }
+
+  addHandlerGoToPagetop(handler) {
+    document.querySelector(".pagetop").addEventListener("click", handler);
   }
 
   removeLoadingMessage() {
