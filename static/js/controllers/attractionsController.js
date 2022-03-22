@@ -1,7 +1,6 @@
-import * as model from "./attractionsModel.js";
-import attractionsView from "./attractionsView.js";
-import searchView from "./searchView.js";
-import modalView from "./modalView.js";
+import * as model from "../model.js";
+import attractionsView from "../views/attractionsView.js";
+import searchView from "../views/searchView.js";
 
 const showAttractions = async () => {
   try {
@@ -57,13 +56,26 @@ const controlSearchResults = async () => {
   }
 };
 
+const controlPagetop = () => {
+  const btnPagetop = document.querySelector(".pagetop");
+  if (
+    document.body.scrollTop > 100 ||
+    document.documentElement.scrollTop > 100
+  ) {
+    btnPagetop.style.display = "block";
+  } else {
+    btnPagetop.style.display = "none";
+  }
+  attractionsView.addHandlerGoToPagetop(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+};
+
 const init = () => {
   showAttractions();
   attractionsView.addHandlerRender(controlLoadMore);
+  attractionsView.addHandlerShowPagetopBtn(controlPagetop);
   searchView.addHandlerSearch(controlSearchResults);
-  modalView.handleShowSigninModal();
-  modalView.handleShowSignupModal();
-  modalView.handleCloseModal();
 };
 
 init();

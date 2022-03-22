@@ -1,0 +1,130 @@
+{% extends "base.html" %} {% block stylesheet %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static',filename='css/booking.css') }}"
+/>
+{% endblock %} {% block script%}
+<script
+  defer
+  type="module"
+  src="{{ url_for('static',filename='js/controllers/bookingController.js') }}"
+></script>
+{% endblock %} {% block section %}
+<div class="main-container booking">
+  <div class="loader hidden">
+    <p>Please wait for a bit...</p>
+    <div class="loading">
+      <div class="dot dot--bounce"></div>
+      <div class="dot dot--bounce"></div>
+      <div class="dot dot--bounce"></div>
+    </div>
+  </div>
+  <!-- <h2 class="booking-header">您好，user，待預定的行程如下：</h2>
+  <p class="booking-message">目前沒有任何待預訂的行程</p>
+  <section class="section-cart booking-container">
+    <div class="products">
+      <div class="product grid">
+        <img src="../static/img/3e.jpeg" alt="Attraction photo" />
+        <div class="product__content">
+          <p class="product__title">台北一日遊：平安鐘</p>
+          <dl class="product__infos">
+            <div class="product__info">
+              <dt>日期：</dt>
+              <dd>2021-04-23</dd>
+            </div>
+            <div class="product__info">
+              <dt>時間：</dt>
+              <dd>早上 9 點到下午 4 點</dd>
+            </div>
+            <div class="product__info">
+              <dt>費用：</dt>
+              <dd>新台幣 2000 元</dd>
+            </div>
+            <div class="product__info">
+              <dt>地點：</dt>
+              <dd>臺北市 大安區忠孝東路4段</dd>
+            </div>
+          </dl>
+          <button class="btn delete__btn">
+            <img
+              src="../static/img/icon/delete.svg"
+              class="delete__icon"
+              alt="Delete icon"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr class="horizontal-line" />
+  <form class="form-reservation">
+    <section class="section-contact booking-container">
+      <h3 class="contact__header">您的聯絡資訊</h3>
+      <div class="contact__field">
+        <label for="contact__name"
+          >聯絡姓名：
+          <input type="text" id="contact__name" required />
+        </label>
+        <label for="contact__email"
+          >連絡信箱：
+          <input type="email" id="contact__email" required />
+        </label>
+        <label for="contact__mobile"
+          >手機號碼：
+          <input type="tel" id="contact__mobile" pattern="[0-9]*" required />
+        </label>
+        <p class="contact__notice">
+          請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。
+        </p>
+      </div>
+    </section>
+    <hr class="horizontal-line" />
+    <section class="section-payment booking-container">
+      <h3 class="payment__header">信用卡付款資訊</h3>
+      <div class="payment__field">
+        <label for="card-number"
+          >卡片號碼：
+          <input
+            id="card-number"
+            type="text"
+            pattern="[0-9]*"
+            inputmode="numeric"
+            placeholder="**** **** **** ****"
+            autocomplete="off"
+            required
+          />
+        </label>
+        <label for="expiration-date"
+          >過期時間：
+          <input
+            id="expiration-date"
+            type="text"
+            pattern="(0?[1-9]|1[0-2])\/(\d{2})"
+            placeholder="MM / YY"
+            autocomplete="off"
+            required
+          />
+        </label>
+        <label for="security-code"
+          >驗證密碼：
+          <input
+            id="security-code"
+            type="text"
+            pattern="[0-9]{3}"
+            inputmode="numeric"
+            placeholder="CVV"
+            autocomplete="off"
+            required
+          />
+        </label>
+      </div>
+    </section>
+    <hr class="horizontal-line" />
+    <div class="checkout booking-container">
+      <p class="checkout__amount">總價：新台幣 2000 元</p>
+      <button class="btn checkout__btn">確認訂購並付款</button>
+    </div>
+  </form> -->
+</div>
+
+{% endblock %}

@@ -1,7 +1,6 @@
-import { TRIP_PRICE_AM, TRIP_PRICE_PM } from "./config.js";
-import modalView from "./modalView.js";
-import * as model from "./attractionsModel.js";
-import attractionView from "./attractionView.js";
+import { TRIP_PRICE_AM, TRIP_PRICE_PM } from "../config.js";
+import * as model from "../model.js";
+import attractionView from "../views/attractionView.js";
 
 const showAttraction = async () => {
   try {
@@ -78,9 +77,6 @@ const init = async () => {
     attractionView.addHandlerSlide(controlSlide);
     attractionView.addHandlerSlideDot(controlSlideDot);
     attractionView.addHandlerChangePrice(controlPrice);
-    modalView.handleShowSigninModal();
-    modalView.handleShowSignupModal();
-    modalView.handleCloseModal();
   } catch (err) {
     attractionView.renderError(err);
   }

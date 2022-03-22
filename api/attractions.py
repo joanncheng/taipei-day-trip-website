@@ -1,6 +1,7 @@
 from flask import request, jsonify
 from flask_restful import Resource
 from models.database import mydbpool
+from .helper import handle_error
 
 
 def format_attraction_data(data):
@@ -8,10 +9,6 @@ def format_attraction_data(data):
     data["longitude"] = float(data["longitude"])
     data["images"] = data["images"].split(",")
     return data
-
-
-def handle_error(message, status_code):
-    return {"error": True, "message": message}, status_code
 
 
 class Attractions(Resource):
