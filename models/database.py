@@ -81,6 +81,50 @@ class Database:
                 cursor.close()
                 cnx.close()
 
+    def find_user(self, email):
+        try:
+            cnx = self.cnxpool.get_connection()
+            cursor = cnx.cursor(dictionary=True)
+
+            cursor.execute("SELECT * FROM user WHERE email = %s;", (email,))
+
+            return cursor.fetchone()
+
+        except Exception as e:
+            print("Error occured: ", e)
+            return False
+
+        finally:
+            if cnx.is_connected():
+                cursor.close()
+                cnx.close()
+
+    def create_user(self, name, email, password):
+        try:
+            cnx = self.cnxpool.get_connection()
+            cursor = cnx.cursor(dictionary=True)
+            cursor.execute(
+                "INSERT INTO user (name, email, password) VALUES (%s, %s, %s);",
+                (
+                    name,
+                    email,
+                    password,
+                ),
+            )
+            cnx.commit()
+
+            return True
+
+        except Exception as e:
+            print("Error occured: ", e)
+            cnx.rollback()
+            return False
+
+        finally:
+            if cnx.is_connected():
+                cursor.close()
+                cnx.close()
+
 
 try:
     mydbpool = Database()

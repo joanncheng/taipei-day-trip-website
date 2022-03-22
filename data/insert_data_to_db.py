@@ -16,36 +16,41 @@ try:
         print("db is connected.")
         cursor = db.cursor(dictionary=True)
 
-        with open("taipei-attractions.json") as f:
-            data = json.load(f)
-            attractions = data["result"]["results"]
-            for attraction in attractions:
-                # Get image URIs
-                file_uris = attraction["file"].lower().split("https://")
-                images = []
-                for uri in file_uris:
-                    if uri.endswith("jpg") or uri.endswith("png"):
-                        images.append("https://" + uri)
+        # with open("taipei-attractions.json") as f:
+        #     data = json.load(f)
+        #     attractions = data["result"]["results"]
+        #     for attraction in attractions:
+        #         # Get image URIs
+        #         file_uris = attraction["file"].lower().split("https://")
+        #         images = []
+        #         for uri in file_uris:
+        #             if uri.endswith("jpg") or uri.endswith("png"):
+        #                 images.append("https://" + uri)
 
-                # Insert attractions into database
-                attraction_data = {
-                    "id": attraction["_id"],
-                    "name": attraction["stitle"],
-                    "category": attraction["CAT2"],
-                    "description": attraction["xbody"],
-                    "address": attraction["address"].replace(" ", ""),
-                    "transport": attraction["info"],
-                    "mrt": attraction["MRT"],
-                    "latitude": attraction["latitude"],
-                    "longitude": attraction["longitude"],
-                    "images": ",".join(images),
-                }
+        #         # Insert attractions into database
+        #         attraction_data = {
+        #             "id": attraction["_id"],
+        #             "name": attraction["stitle"],
+        #             "category": attraction["CAT2"],
+        #             "description": attraction["xbody"],
+        #             "address": attraction["address"].replace(" ", ""),
+        #             "transport": attraction["info"],
+        #             "mrt": attraction["MRT"],
+        #             "latitude": attraction["latitude"],
+        #             "longitude": attraction["longitude"],
+        #             "images": ",".join(images),
+        #         }
 
-                sql = "INSERT INTO attractions (id, name, category, description, address, transport, mrt, latitude, longitude, images) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                val = [attraction_data[key] for key in attraction_data]
-                cursor.execute(sql, tuple(val))
-                db.commit()
-                print(cursor.rowcount, "record inserted.")
+        #         sql = "INSERT INTO attractions (id, name, category, description, address, transport, mrt, latitude, longitude, images) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        #         val = [attraction_data[key] for key in attraction_data]
+        #         cursor.execute(sql, tuple(val))
+        #         db.commit()
+        #         print(cursor.rowcount, "record inserted.")
+
+        sql = "CREATE TABLE user (id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL)"
+
+        cursor.execute(sql)
+        db.commit()
 
 except Error as e:
     print("Error occured: ", e)

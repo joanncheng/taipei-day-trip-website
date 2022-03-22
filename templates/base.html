@@ -22,7 +22,7 @@
     <script
       defer
       type="module"
-      src="{{ url_for('static',filename='js/authController.js') }}"
+      src="{{ url_for('static',filename='js/controllers/navController.js') }}"
     ></script>
 
     {% block script%} {% endblock %}
@@ -40,13 +40,9 @@
         <a href="/" class="nav__logo" id="logo">台北一日遊</a>
         <ul class="nav__links">
           <li class="nav__item">
-            <a class="nav__link" href="/booking">預定行程</a>
+            <a class="nav__link btn--booking" href="/booking">預定行程</a>
           </li>
-          <li class="nav__item">
-            <a class="nav__link nav__link-btn btn--show-signin" href="#"
-              >登入&sol;註冊</a
-            >
-          </li>
+          <li class="nav__item" data-auth></li>
         </ul>
       </nav>
     </header>
@@ -77,6 +73,7 @@
             required
           />
           <button class="btn form__btn">登入帳戶</button>
+          <div class="form__message"></div>
         </form>
         <a class="popup__link btn--show-signup">還沒有帳戶？點此註冊</a>
       </div>
@@ -90,7 +87,7 @@
           />
         </button>
         <h2 class="popup__header">註冊會員帳號</h2>
-        <form class="form-signup form">
+        <form class="form-signup form" autocomplete="off">
           <input
             type="text"
             placeholder="輸入姓名"
@@ -113,6 +110,7 @@
             required
           />
           <button class="btn form__btn">註冊新帳戶</button>
+          <div class="form__message"></div>
         </form>
         <a class="popup__link btn--show-signin">已經有帳戶了？點此登入</a>
       </div>

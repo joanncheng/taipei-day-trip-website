@@ -1,3 +1,7 @@
+.header {
+  border-bottom: 1px solid var(--color-gray-300);
+}
+
 .booking-header {
   text-align: left;
   width: 1000px;

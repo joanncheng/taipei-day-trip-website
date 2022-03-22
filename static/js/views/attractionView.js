@@ -1,4 +1,4 @@
-import { TRIP_PRICE_AM, TRIP_PRICE_PM } from "./config.js";
+import { TRIP_PRICE_AM, TRIP_PRICE_PM } from "../config.js";
 
 class AttractionView {
   _parentElement = document.querySelector(".attraction-profile");

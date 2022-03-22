@@ -7,10 +7,9 @@
 <script
   defer
   type="module"
-  src="{{ url_for('static',filename='js/bookingController.js') }}"
+  src="{{ url_for('static',filename='js/controllers/bookingController.js') }}"
 ></script>
 {% endblock %} {% block section %}
-<hr class="separator sticky" />
 <div class="main-container booking">
   <div class="loader hidden">
     <p>Please wait for a bit...</p>
@@ -20,9 +19,9 @@
       <div class="dot dot--bounce"></div>
     </div>
   </div>
-  <h2 class="booking-header">您好，Yakko，待預定的行程如下：</h2>
+  <!-- <h2 class="booking-header">您好，user，待預定的行程如下：</h2>
   <p class="booking-message">目前沒有任何待預訂的行程</p>
-  <!-- <section class="section-cart booking-container">
+  <section class="section-cart booking-container">
     <div class="products">
       <div class="product grid">
         <img src="../static/img/3e.jpeg" alt="Attraction photo" />
@@ -72,7 +71,7 @@
         </label>
         <label for="contact__mobile"
           >手機號碼：
-          <input type="tel" id="contact__mobile" pattern="[0-9]{10}" required />
+          <input type="tel" id="contact__mobile" pattern="[0-9]*" required />
         </label>
         <p class="contact__notice">
           請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。
@@ -91,6 +90,7 @@
             pattern="[0-9]*"
             inputmode="numeric"
             placeholder="**** **** **** ****"
+            autocomplete="off"
             required
           />
         </label>
@@ -99,9 +99,9 @@
           <input
             id="expiration-date"
             type="text"
-            pattern="[0-9]*"
-            inputmode="numeric"
+            pattern="(0?[1-9]|1[0-2])\/(\d{2})"
             placeholder="MM / YY"
+            autocomplete="off"
             required
           />
         </label>
@@ -110,9 +110,10 @@
           <input
             id="security-code"
             type="text"
-            pattern="[0-9]*"
+            pattern="[0-9]{3}"
             inputmode="numeric"
             placeholder="CVV"
+            autocomplete="off"
             required
           />
         </label>
