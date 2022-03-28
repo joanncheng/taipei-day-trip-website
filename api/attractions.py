@@ -21,7 +21,7 @@ class Attractions(Resource):
 
         result = mydbpool.get_pagination(per_page, page, keyword)
         if result is False:
-            return handle_error("Something went wrong, please try again later.", 500)
+            return handle_error()
 
         for attraction in result["attractions"]:
             format_attraction_data(attraction)
@@ -32,15 +32,14 @@ class Attractions(Resource):
 
 class Attraction(Resource):
     def get(self, attractionId):
-        attraction = mydbpool.get_attraction(attractionId)
+        attraction = mydbpool.find_one("attractions", {"id": attractionId})
 
         if attraction is None:
             return handle_error("No attraction found with that ID.", 400)
 
         if attraction is False:
-            return handle_error("Something went wrong, please try again later.", 500)
+            return handle_error()
 
         format_attraction_data(attraction)
 
-        res = {"data": attraction}
-        return jsonify(res)
+        return jsonify({"data": attraction})

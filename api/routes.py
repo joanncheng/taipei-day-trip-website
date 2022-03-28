@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint
 from flask_restful import Api
 from .user import User
 from .attractions import Attraction, Attractions
