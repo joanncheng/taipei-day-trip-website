@@ -17,25 +17,6 @@ class Database:
             database="taipei_day_trip_website",
         )
 
-    def get_attraction(self, attraction_id):
-        try:
-            cnx = self.cnxpool.get_connection()
-            cursor = cnx.cursor(dictionary=True)
-
-            cursor.execute("SELECT * FROM attractions WHERE id = %s", (attraction_id,))
-
-            record = cursor.fetchone()
-            return record
-
-        except Exception as e:
-            print("Error occured: ", e)
-            return False
-
-        finally:
-            if cnx.is_connected():
-                cursor.close()
-                cnx.close()
-
     def get_pagination(self, per_page, page, keyword):
         try:
             cnx = self.cnxpool.get_connection()
@@ -73,7 +54,7 @@ class Database:
             return {"next_page": next_page, "attractions": attractions}
 
         except Exception as e:
-            print("Error occured: ", e)
+            print("Error occurred: ", e)
             return False
 
         finally:
@@ -81,17 +62,27 @@ class Database:
                 cursor.close()
                 cnx.close()
 
-    def find_user(self, email):
+    def find_one(self, table, option):
         try:
             cnx = self.cnxpool.get_connection()
             cursor = cnx.cursor(dictionary=True)
 
-            cursor.execute("SELECT * FROM user WHERE email = %s;", (email,))
+            for key, value in option.items():
+                if table == "booking":
+                    cursor.execute(
+                        "SELECT * FROM booking JOIN attractions ON booking.attractionId = attractions.id WHERE "
+                        + key
+                        + "= %s;",
+                        (value,),
+                    )
+
+                else:
+                    cursor.execute("SELECT * FROM " + table + " WHERE " + key + "= %s;", (value,))
 
             return cursor.fetchone()
 
         except Exception as e:
-            print("Error occured: ", e)
+            print("Error occurred when selecting: ", e)
             return False
 
         finally:
@@ -99,24 +90,61 @@ class Database:
                 cursor.close()
                 cnx.close()
 
-    def create_user(self, name, email, password):
+    def create_one(self, table, data):
         try:
             cnx = self.cnxpool.get_connection()
             cursor = cnx.cursor(dictionary=True)
-            cursor.execute(
-                "INSERT INTO user (name, email, password) VALUES (%s, %s, %s);",
-                (
-                    name,
-                    email,
-                    password,
-                ),
-            )
-            cnx.commit()
 
+            if table == "user":
+                cursor.execute(
+                    "INSERT INTO user (name, email, password) VALUES (%s, %s, %s);",
+                    (
+                        data["name"],
+                        data["email"],
+                        data["password"],
+                    ),
+                )
+
+            elif table == "booking":
+                cursor.execute("DELETE FROM booking WHERE userId = %s;", (data["userId"],))
+
+                cursor.execute(
+                    "INSERT INTO booking (userId, attractionId, date, time, price) VALUES (%s, %s, %s, %s, %s);",
+                    (
+                        data["userId"],
+                        data["attractionId"],
+                        data["date"],
+                        data["time"],
+                        data["price"],
+                    ),
+                )
+
+            cnx.commit()
             return True
 
         except Exception as e:
-            print("Error occured: ", e)
+            print("Error occurred when inserting: ", e)
+            cnx.rollback()
+            return False
+
+        finally:
+            if cnx.is_connected():
+                cursor.close()
+                cnx.close()
+
+    def delete_one(self, table, option):
+        try:
+            cnx = self.cnxpool.get_connection()
+            cursor = cnx.cursor(dictionary=True)
+
+            for key, value in option.items():
+                cursor.execute("DELETE FROM " + table + " WHERE " + key + "= %s;", (value,))
+
+            cnx.commit()
+            return True
+
+        except Exception as e:
+            print("Error occurred when deleting: ", e)
             cnx.rollback()
             return False
 

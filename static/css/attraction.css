@@ -147,9 +147,13 @@
   background-color: #ffffff;
 }
 
+.booking__date:focus,
+.booking__date:focus:invalid {
+  border-bottom: none;
+}
+
 input[type="date"]::-webkit-calendar-picker-indicator {
   background: url("../img/icon/calendar.svg") no-repeat;
-  padding: 5px;
   cursor: pointer;
 }
 
@@ -192,6 +196,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: #ffffff;
 }
 
+.booking__message {
+  display: inline-block;
+  margin-left: 10px;
+  color: var(--color-error);
+}
+
 /**************************/
 /* SECTION-INFOS */
 /**************************/
@@ -226,12 +236,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 @media (max-width: 44em) {
   .slider {
-    width: 85%;
+    width: 95%;
     height: 390px;
   }
 
   .profile {
-    width: 85%;
+    width: 95%;
   }
 
   .form-booking {

@@ -47,7 +47,9 @@ try:
         #         db.commit()
         #         print(cursor.rowcount, "record inserted.")
 
-        sql = "CREATE TABLE user (id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL)"
+        # sql = "CREATE TABLE user (id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL)"
+
+        sql = "CREATE TABLE booking (id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY, attractionId BIGINT NOT NULL,userId BIGINT NOT NULL, date DATE NOT NULL, time VARCHAR(50) NOT NULL, price BIGINT NOT NULL, FOREIGN KEY(attractionId) REFERENCES attractions(id), FOREIGN KEY(userId) REFERENCES user(id) ON DELETE CASCADE);"
 
         cursor.execute(sql)
         db.commit()

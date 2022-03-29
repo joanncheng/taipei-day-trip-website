@@ -5,7 +5,7 @@ import jwt
 from datetime import datetime, timedelta, timezone
 import bcrypt
 from models.database import mydbpool
-from .helper import handle_error, correct_password
+from .helper import handle_error, correct_password, decode_jwt
 
 
 def send_jwt(email):
@@ -24,13 +24,12 @@ class User(Resource):
     def get(self):
         try:
             token = request.cookies.get("jwt")
-            if not token:
+            if not token or token == "loggedout":
                 return {"data": None}
 
-            decoded = jwt.decode(token, config("JWT_SECRET"), algorithms="HS256")
-            user_email = decoded["email"]
+            decoded = decode_jwt(token)
 
-            user = mydbpool.find_user(user_email)
+            user = mydbpool.find_one("user", {"email": decoded["email"]})
 
             user.pop("password")
 
@@ -50,15 +49,14 @@ class User(Resource):
         if not name or not email or not password:
             return handle_error("請輸入姓名、電子郵件、密碼 ", 400)
 
-        if mydbpool.find_user(email):
+        if mydbpool.find_one("user", {"email": email}):
             return handle_error("此電子信箱已被註冊", 400)
 
-        hashed_password = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
-
-        new_user = mydbpool.create_user(name, email, hashed_password)
+        data["password"] = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
+        new_user = mydbpool.create_one("user", data)
 
         if not new_user:
-            return handle_error("Something went wrong, please try again later.", 500)
+            return handle_error()
 
         return send_jwt(email)
 
@@ -71,13 +69,13 @@ class User(Resource):
         if not email or not password:
             return handle_error("請輸入電子信箱、密碼 ", 400)
 
-        user = mydbpool.find_user(email)
+        user = mydbpool.find_one("user", {"email": email})
 
         if user is None or not correct_password(password, user["password"]):
             return handle_error("電子信箱或密碼輸入錯誤", 400)
 
         if user is False:
-            return handle_error("Something went wrong, please try again later.", 500)
+            return handle_error()
 
         return send_jwt(email)
 

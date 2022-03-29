@@ -8,6 +8,7 @@ export const state = {
   attraction: {},
   user: null,
   status: {},
+  booking: null,
 };
 
 export const loadAttractions = async (page = 0, query = "") => {
@@ -45,6 +46,7 @@ export const loadAttraction = async (id) => {
     if (!res.ok) throw new Error(`${data.message} (${res.status})`);
 
     state.attraction = {
+      id: data.data.id,
       name: data.data.name,
       category: data.data.category,
       description: data.data.description,
@@ -106,6 +108,41 @@ export const logout = async () => {
     const data = await res.json();
     if (data.ok) state.user = null;
     state.status = data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const booking = async (attractionId, date, time, price) => {
+  try {
+    const res = await fetchData(`${API_URL}/booking`, {
+      attractionId,
+      date,
+      time,
+      price,
+    });
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const loadBooking = async () => {
+  try {
+    const res = await fetchData(`${API_URL}/booking`);
+    const data = await res.json();
+    state.booking = data.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const deleteBooking = async () => {
+  try {
+    const res = await fetchData(`${API_URL}/booking`, {}, "DELETE");
+    const data = await res.json();
+    if (data.ok) state.booking = null;
   } catch (err) {
     throw err;
   }
