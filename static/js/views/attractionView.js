@@ -69,7 +69,8 @@ class AttractionView {
             </p>
             <div class="form__item">
               <label for="booking__date">選擇日期：</label>
-              <input type="date" id="booking__date" class="booking__date" required />
+              <input type="date" id="booking__date" class="booking__date"
+              required />
             </div>
             <div class="form__item">
               <label>選擇時間：</label>
@@ -80,7 +81,7 @@ class AttractionView {
                     id="booking__time--am"
                     class="booking__radio booking__time--am"
                     name="time"
-                    value="${TRIP_PRICE_AM}"
+                    value="morning"
                     required
                     checked
                   />
@@ -93,7 +94,7 @@ class AttractionView {
                     id="booking__time--pm"
                     class="booking__radio booking__time--pm"
                     name="time"
-                    value="${TRIP_PRICE_PM}"
+                    value="afternoon"
                     required
                   />
                   下半天
@@ -105,6 +106,7 @@ class AttractionView {
               <p class="booking__price">新台幣 <span>${TRIP_PRICE_AM}</span> 元</p>
             </div>
             <button class="btn booking__btn">開始預定行程</button>
+            <div class="booking__message"></div>
           </form>
         </div>
       </section>
@@ -143,6 +145,10 @@ class AttractionView {
       .addEventListener("change", handler);
   }
 
+  addHandlerBooking(handler) {
+    document.querySelector(".booking__btn").addEventListener("click", handler);
+  }
+
   clear() {
     this._parentElement.innerHTML = "";
   }
@@ -163,6 +169,17 @@ class AttractionView {
 
   removeLoadingMessage() {
     document.querySelector(".loader").style.display = "none";
+  }
+
+  renderMessage(msg) {
+    const msgContainer = document.querySelector(".booking__message");
+
+    const markup = `<span>${msg}</span>`;
+
+    msgContainer.innerHTML = markup;
+    setTimeout(() => {
+      msgContainer.innerHTML = "";
+    }, 1000);
   }
 }
 

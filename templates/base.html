@@ -17,15 +17,7 @@
       href="{{ url_for('static',filename='css/general.css') }}"
     />
 
-    {% block stylesheet%} {% endblock %}
-
-    <script
-      defer
-      type="module"
-      src="{{ url_for('static',filename='js/controllers/navController.js') }}"
-    ></script>
-
-    {% block script%} {% endblock %}
+    {% block stylesheet%} {% endblock %} {% block script%} {% endblock %}
 
     <title>台北一日遊</title>
     <meta
@@ -39,9 +31,7 @@
       <nav class="nav main-container">
         <a href="/" class="nav__logo" id="logo">台北一日遊</a>
         <ul class="nav__links">
-          <li class="nav__item">
-            <a class="nav__link btn--booking" href="/booking">預定行程</a>
-          </li>
+          <li class="nav__item" data-cart></li>
           <li class="nav__item" data-auth></li>
         </ul>
       </nav>
@@ -116,22 +106,6 @@
       </div>
       {% block section %}{% endblock %}
     </main>
-    <button class="btn pagetop">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="pagetop__icon"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M5 15l7-7 7 7"
-        />
-      </svg>
-    </button>
     <footer class="footer">
       <p class="copyright">COPYRIGHT &copy; 2021 台北一日遊</p>
     </footer>

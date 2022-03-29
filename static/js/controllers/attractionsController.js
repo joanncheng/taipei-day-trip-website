@@ -1,6 +1,7 @@
 import * as model from "../model.js";
 import attractionsView from "../views/attractionsView.js";
 import searchView from "../views/searchView.js";
+import { loadNavScript } from "../helper.js";
 
 const showAttractions = async () => {
   try {
@@ -71,11 +72,18 @@ const controlPagetop = () => {
   });
 };
 
-const init = () => {
-  showAttractions();
-  attractionsView.addHandlerRender(controlLoadMore);
-  attractionsView.addHandlerShowPagetopBtn(controlPagetop);
-  searchView.addHandlerSearch(controlSearchResults);
+const init = async () => {
+  try {
+    await model.checkLoggedIn();
+    loadNavScript();
+
+    await showAttractions();
+    attractionsView.addHandlerRender(controlLoadMore);
+    attractionsView.addHandlerShowPagetopBtn(controlPagetop);
+    searchView.addHandlerSearch(controlSearchResults);
+  } catch (err) {
+    attractionsView.renderError("伺服器內部錯誤，請稍後再試");
+  }
 };
 
 init();

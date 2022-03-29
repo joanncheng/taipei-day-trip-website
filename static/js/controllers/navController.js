@@ -1,6 +1,7 @@
 import * as model from "../model.js";
 import modalView from "../views/modalView.js";
 import authFormView from "../views/authFormView.js";
+import bookingView from "../views/bookingView.js";
 
 const controlSignup = async (e) => {
   try {
@@ -20,7 +21,7 @@ const controlSignup = async (e) => {
       .querySelectorAll(".form-signup input")
       .forEach((el) => (el.value = ""));
   } catch (err) {
-    authFormView.showAlert("error", "伺服器內部錯誤，請稍候再試");
+    authFormView.showAlert("error", "註冊失敗，伺服器內部錯誤，請稍後再試");
     console.error(err);
   }
 };
@@ -28,6 +29,7 @@ const controlSignup = async (e) => {
 const controlLogin = async (e) => {
   try {
     e.preventDefault();
+
     const email = document.getElementById("signin-email").value;
     const password = document.getElementById("signin-password").value;
 
@@ -43,7 +45,7 @@ const controlLogin = async (e) => {
       .querySelectorAll(".form-signin input")
       .forEach((el) => (el.value = ""));
   } catch (err) {
-    authFormView.showAlert("error", "伺服器內部錯誤，請稍候再試");
+    authFormView.showAlert("error", "登入失敗，伺服器內部錯誤，請稍後再試");
     console.error(err);
   }
 };
@@ -53,21 +55,26 @@ const controlLogout = async () => {
     await model.logout();
     if (model.state.status.ok) location.reload(true);
   } catch (err) {
-    authFormView.showAlert("error", "登出失敗，請稍候再試");
+    authFormView.showAlert("error", "登出失敗，伺服器內部錯誤，請稍後再試");
     console.error(err);
   }
 };
 
 const init = async () => {
-  await model.checkLoggedIn();
-  authFormView.renderAuthBtn(model.state.user);
+  try {
+    authFormView.renderAuthBtn(model.state.user);
+    bookingView.renderNavBookingBtn(model.state.user);
 
-  if (model.state.user) {
-    authFormView.addHandlerLogout(controlLogout);
-  } else {
-    modalView.showModal();
-    authFormView.addHandlerSignup(controlSignup);
-    authFormView.addHandlerLogin(controlLogin);
+    if (model.state.user) {
+      authFormView.addHandlerLogout(controlLogout);
+    } else {
+      modalView.showModal();
+      authFormView.addHandlerSignup(controlSignup);
+      authFormView.addHandlerLogin(controlLogin);
+    }
+  } catch (err) {
+    authFormView.showAlert("error", "伺服器內部錯誤，請稍後再試");
+    console.error(err);
   }
 };
 

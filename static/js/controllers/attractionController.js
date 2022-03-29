@@ -1,6 +1,7 @@
 import { TRIP_PRICE_AM, TRIP_PRICE_PM } from "../config.js";
 import * as model from "../model.js";
 import attractionView from "../views/attractionView.js";
+import { loadNavScript } from "../helper.js";
 
 const showAttraction = async () => {
   try {
@@ -16,9 +17,11 @@ const showAttraction = async () => {
 
 const restrictBookingDate = () => {
   const availableDate = document.getElementById("booking__date");
+  const minDate = new Date();
   const maxDate = new Date();
+  minDate.setDate(minDate.getDate() + 1);
   maxDate.setFullYear(maxDate.getFullYear() + 1);
-  availableDate.min = new Date().toLocaleDateString("en-ca");
+  availableDate.min = minDate.toLocaleDateString("en-ca");
   availableDate.max = maxDate.toLocaleDateString("en-ca");
 };
 
@@ -70,13 +73,41 @@ const controlPrice = (e) => {
   }
 };
 
+const controlBookingBtn = async (e) => {
+  try {
+    e.preventDefault();
+    if (!model.state.user) {
+      document.querySelector(".signin").classList.remove("hidden");
+      document.querySelector(".overlay").classList.remove("hidden");
+    } else {
+      const attractionId = model.state.attraction.id;
+      const date = document.getElementById("booking__date").value;
+      const time = document.querySelector('input[name="time"]:checked').value;
+      const price = time === "afternoon" ? TRIP_PRICE_PM : TRIP_PRICE_AM;
+
+      if (!date || new Date() > new Date(date)) {
+        attractionView.renderMessage("請選擇有效的日期");
+        return;
+      }
+      const booked = await model.booking(attractionId, date, time, price);
+      if (booked.ok) location.assign("/booking");
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+
 const init = async () => {
   try {
+    await model.checkLoggedIn();
+    loadNavScript();
+
     await showAttraction();
     restrictBookingDate();
     attractionView.addHandlerSlide(controlSlide);
     attractionView.addHandlerSlideDot(controlSlideDot);
     attractionView.addHandlerChangePrice(controlPrice);
+    attractionView.addHandlerBooking(controlBookingBtn);
   } catch (err) {
     attractionView.renderError(err);
   }

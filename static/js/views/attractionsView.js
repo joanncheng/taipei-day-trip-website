@@ -51,6 +51,7 @@ class AttractionsView {
         </div>`;
     this.clear();
     this.hideLoading();
+    this.removeLoadingMessage();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 
