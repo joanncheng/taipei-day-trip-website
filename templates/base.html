@@ -36,7 +36,13 @@
       href="{{ url_for('static',filename='css/general.css') }}"
     />
 
-    {% block stylesheet%} {% endblock %} {% block script%} {% endblock %}
+    {% block stylesheet%} {% endblock %}
+    <script
+      defer
+      type="module"
+      src="{{ url_for('static',filename='js/controllers/navController.js') }}"
+    ></script>
+    {% block script%} {% endblock %}
 
     <title>台北一日遊</title>
     <meta

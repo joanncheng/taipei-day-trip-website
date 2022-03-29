@@ -62,6 +62,8 @@ const controlLogout = async () => {
 
 const init = async () => {
   try {
+    await model.checkLoggedIn();
+
     authFormView.renderAuthBtn(model.state.user);
     bookingView.renderNavBookingBtn(model.state.user);
 
@@ -78,4 +80,4 @@ const init = async () => {
   }
 };
 
-init();
+export default init;

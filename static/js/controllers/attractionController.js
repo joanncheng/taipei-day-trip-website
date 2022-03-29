@@ -1,7 +1,7 @@
 import { TRIP_PRICE_AM, TRIP_PRICE_PM } from "../config.js";
 import * as model from "../model.js";
 import attractionView from "../views/attractionView.js";
-import { loadNavScript } from "../helper.js";
+import navBar from "./navController.js";
 
 const showAttraction = async () => {
   try {
@@ -99,8 +99,7 @@ const controlBookingBtn = async (e) => {
 
 const init = async () => {
   try {
-    await model.checkLoggedIn();
-    loadNavScript();
+    await navBar();
 
     await showAttraction();
     restrictBookingDate();

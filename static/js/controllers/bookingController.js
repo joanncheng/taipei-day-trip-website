@@ -1,6 +1,6 @@
 import * as model from "../model.js";
 import bookingView from "../views/bookingView.js";
-import { loadNavScript } from "../helper.js";
+import navBar from "./navController.js";
 
 const showBooking = async () => {
   try {
@@ -23,11 +23,11 @@ const controlDeleteBooking = async () => {
 
 const init = async () => {
   try {
-    await model.checkLoggedIn();
+    await navBar();
+
     if (!model.state.user) {
       location.assign("/");
     }
-    loadNavScript();
 
     await showBooking();
     if (model.state.booking !== null) {

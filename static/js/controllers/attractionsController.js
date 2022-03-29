@@ -1,7 +1,7 @@
 import * as model from "../model.js";
 import attractionsView from "../views/attractionsView.js";
 import searchView from "../views/searchView.js";
-import { loadNavScript } from "../helper.js";
+import navBar from "./navController.js";
 
 const showAttractions = async () => {
   try {
@@ -74,8 +74,7 @@ const controlPagetop = () => {
 
 const init = async () => {
   try {
-    await model.checkLoggedIn();
-    loadNavScript();
+    await navBar();
 
     await showAttractions();
     attractionsView.addHandlerRender(controlLoadMore);

@@ -26,10 +26,3 @@ export const fetchData = async (url, postData = undefined, method = "POST") => {
     throw err;
   }
 };
-
-export const loadNavScript = () => {
-  const script = document.createElement("script");
-  script.type = "module";
-  script.src = "/static/js/controllers/navController.js";
-  document.body.appendChild(script);
-};
