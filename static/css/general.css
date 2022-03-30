@@ -171,6 +171,19 @@ input:focus:invalid {
   border-radius: 6px;
 }
 
+.signin {
+  transform: translate(-50%, -50%);
+  animation: fade 400ms ease-in-out forwards;
+  opacity: 0;
+}
+
+@keyframes fade {
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
 .popup::before {
   content: "";
   position: absolute;
