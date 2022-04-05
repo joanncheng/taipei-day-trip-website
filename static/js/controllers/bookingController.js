@@ -111,20 +111,24 @@ const controlSubmit = (e) => {
   }
 
   TPDirect.card.getPrime(async (result) => {
-    if (result.status !== 0) {
-      bookingView.showAlert("error", `付款失敗(${result.msg})`);
-      return;
-    }
-    const checkoutResult = await model.checkout(result.card.prime, {
-      name,
-      email,
-      phone,
-    });
+    try {
+      if (result.status !== 0) {
+        bookingView.showAlert("error", `付款失敗(${result.msg})`);
+        return;
+      }
+      const checkoutResult = await model.checkout(result.card.prime, {
+        name,
+        email,
+        phone,
+      });
 
-    if (checkoutResult.payment.status === 0) {
-      location.assign(`/thankyou?number=${checkoutResult.number}`);
-    } else {
-      bookingView.showAlert("error", "付款失敗");
+      if (checkoutResult.payment.status === 0) {
+        location.assign(`/thankyou?number=${checkoutResult.number}`);
+      } else {
+        bookingView.showAlert("error", "付款失敗");
+      }
+    } catch (err) {
+      throw err;
     }
   });
 };
