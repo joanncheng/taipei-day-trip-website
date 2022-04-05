@@ -57,8 +57,18 @@ input:focus {
   outline: none;
   border-bottom: 2px solid #55c57a;
 }
+
 input:focus:invalid {
   border-bottom: 2px solid #ff7730;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /**************************/

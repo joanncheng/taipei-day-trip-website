@@ -171,7 +171,7 @@ class AttractionView {
     document.querySelector(".loader").style.display = "none";
   }
 
-  renderMessage(msg) {
+  renderMessage(msg, time = 2) {
     const msgContainer = document.querySelector(".booking__message");
 
     const markup = `<span>${msg}</span>`;
@@ -179,7 +179,7 @@ class AttractionView {
     msgContainer.innerHTML = markup;
     setTimeout(() => {
       msgContainer.innerHTML = "";
-    }, 1000);
+    }, time * 1000);
   }
 }
 

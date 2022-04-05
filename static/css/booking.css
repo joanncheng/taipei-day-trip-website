@@ -78,14 +78,17 @@
   line-height: 16px;
 }
 
-.form-reservation input {
+.contact__field input,
+.tpfield {
   width: 200px;
   height: 38px;
   padding: 10px;
+  font-size: 16px;
+  border: 1px solid var(--color-gray-300);
   border-radius: 5px;
 }
 
-.form-reservation label {
+.contact__field label {
   width: 300px;
 }
 
@@ -100,9 +103,21 @@
   font-weight: 700;
 }
 
-::placeholder {
-  color: var(--color-gray-700);
-  font-family: "Noto Sans TC", sans-serif;
+.form-group {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.tappay-field-focus {
+  outline: 0;
+  border-bottom: 2px solid #55c57a;
+}
+.has-error .tappay-field-focus {
+  border-bottom: 2px solid #ff7730;
+}
+.has-success .tappay-field-focus {
+  border-bottom: 2px solid #55c57a;
 }
 
 .checkout {
