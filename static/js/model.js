@@ -9,6 +9,7 @@ export const state = {
   user: null,
   status: {},
   booking: null,
+  order: {},
 };
 
 export const loadAttractions = async (page = 0, query = "") => {
@@ -143,6 +144,42 @@ export const deleteBooking = async () => {
     const res = await fetchData(`${API_URL}/booking`, {}, "DELETE");
     const data = await res.json();
     if (data.ok) state.booking = null;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const checkout = async (prime, { name, email, phone }) => {
+  try {
+    const options = {
+      prime,
+      order: {
+        price: state.booking.price,
+        trip: {
+          attraction: state.booking.attraction,
+          date: state.booking.date,
+          time: state.booking.time,
+        },
+        contact: {
+          name,
+          email,
+          phone,
+        },
+      },
+    };
+    const res = await fetchData(`${API_URL}/orders`, options);
+    const data = await res.json();
+    return data.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const loadOrder = async (orderNumber) => {
+  try {
+    const res = await fetchData(`${API_URL}/order/${orderNumber}`);
+    const data = await res.json();
+    state.order = data.data;
   } catch (err) {
     throw err;
   }

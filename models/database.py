@@ -75,7 +75,13 @@ class Database:
                         + "= %s;",
                         (value,),
                     )
-
+                elif table == "orders":
+                    cursor.execute(
+                        "SELECT orders.*, a.name AS attractionName, a.address, a.images FROM orders JOIN attractions AS a ON orders.attractionId = a.id WHERE "
+                        + key
+                        + "=%s;",
+                        (value,),
+                    )
                 else:
                     cursor.execute("SELECT * FROM " + table + " WHERE " + key + "= %s;", (value,))
 
@@ -118,6 +124,22 @@ class Database:
                         data["price"],
                     ),
                 )
+            elif table == "orders":
+                cursor.execute(
+                    "INSERT INTO orders (number, attractionId, userId, date, time, price, name, email, phone, status) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);",
+                    (
+                        data["number"],
+                        data["attractionId"],
+                        data["userId"],
+                        data["date"],
+                        data["time"],
+                        data["price"],
+                        data["name"],
+                        data["email"],
+                        data["phone"],
+                        data["status"],
+                    ),
+                )
 
             cnx.commit()
             return True
@@ -146,6 +168,28 @@ class Database:
         except Exception as e:
             print("Error occurred when deleting: ", e)
             cnx.rollback()
+            return False
+
+        finally:
+            if cnx.is_connected():
+                cursor.close()
+                cnx.close()
+
+    def update_one(self, table, data):
+        try:
+            cnx = self.cnxpool.get_connection()
+            cursor = cnx.cursor(dictionary=True)
+
+            if table == "orders":
+                cursor.execute(
+                    "UPDATE orders SET status = %s WHERE number = %s",
+                    (data["status"], data["number"]),
+                )
+                cnx.commit()
+                return True
+
+        except Exception as e:
+            print("Error occurred when selecting: ", e)
             return False
 
         finally:

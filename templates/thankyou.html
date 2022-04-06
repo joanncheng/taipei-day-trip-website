@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block stylesheet %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static',filename='css/thankyou.css') }}"
+/>
+{% endblock %} {% block script%}
+<script
+  defer
+  type="module"
+  src="{{ url_for('static',filename='js/controllers/thankyouController.js') }}"
+></script>
+{% endblock %} {% block section %}
+<div class="main-container booking">
+  <div class="loader">
+    <p>Please wait for a bit...</p>
+    <div class="loading">
+      <div class="dot dot--bounce"></div>
+      <div class="dot dot--bounce"></div>
+      <div class="dot dot--bounce"></div>
+    </div>
+  </div>
+</div>
+<article class="thankyou main-container"></article>
+{% endblock %}

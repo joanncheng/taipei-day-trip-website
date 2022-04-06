@@ -70,9 +70,9 @@ class BookingView {
             >連絡信箱：
             <input type="email" id="contact__email" required />
           </label>
-          <label for="contact__mobile"
+          <label for="contact__phone"
             >手機號碼：
-            <input type="tel" id="contact__mobile" pattern="[0-9]*" required />
+            <input type="tel" id="contact__phone" pattern="[0-9]*" required />
           </label>
           <p class="contact__notice">
             請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。
@@ -83,47 +83,24 @@ class BookingView {
       <section class="section-payment booking-container">
         <h3 class="payment__header">信用卡付款資訊</h3>
         <div class="payment__field">
-          <label for="card-number"
-            >卡片號碼：
-            <input
-              id="card-number"
-              type="text"
-              pattern="[0-9]*"
-              inputmode="numeric"
-              placeholder="**** **** **** ****"
-              autocomplete="off"
-              required
-            />
-          </label>
-          <label for="expiration-date"
-            >過期時間：
-            <input
-              id="expiration-date"
-              type="text"
-              pattern="(0?[1-9]|1[0-2])\\/(\\d{2})"
-              placeholder="MM / YY"
-              autocomplete="off"
-              required
-            />
-          </label>
-          <label for="security-code"
-            >驗證密碼：
-            <input
-              id="security-code"
-              type="text"
-              pattern="[0-9]{3}"
-              inputmode="numeric"
-              placeholder="CVV"
-              autocomplete="off"
-              required
-            />
-          </label>
+          <div class="form-group card-number-group">
+            <label for="card-number">卡片號碼：</label>
+            <div class="tpfield" id="card-number"></div>
+          </div>
+          <div class="form-group expiration-date-group">
+            <label for="card-expiration-date">過期時間：</label>
+            <div class="tpfield" id="card-expiration-date"></div>
+          </div>
+          <div class="form-group cvc-group">
+            <label for="card-ccv">驗證密碼：</label>
+            <div class="tpfield" id="card-ccv"></div>
+          </div>
         </div>
       </section>
       <hr class="horizontal-line" />
       <div class="checkout booking-container">
         <p class="checkout__amount">總價：新台幣 ${data.price} 元</p>
-        <button class="btn checkout__btn">確認訂購並付款</button>
+        <button class="btn checkout__btn" type="submit" disabled="true">確認訂購並付款</button>
       </div>
     </form>
     `;
@@ -146,12 +123,40 @@ class BookingView {
     document.querySelector(".delete__btn").addEventListener("click", handler);
   }
 
+  addHandlerFormSubmit(handler) {
+    document
+      .querySelector(".form-reservation")
+      .addEventListener("submit", handler);
+  }
+
+  addHandlerTappayFields(handler) {
+    TPDirect.card.onUpdate(handler);
+  }
+
   removeLoadingMessage() {
     document.querySelector(".loader").style.display = "none";
   }
 
   clear() {
     this._parentElement.innerHTML = "";
+  }
+
+  setNumberFormGroupToError(el) {
+    const selector = document.querySelector(el);
+    selector.classList.add("has-error");
+    selector.classList.remove("has-success");
+  }
+
+  setNumberFormGroupToSuccess(el) {
+    const selector = document.querySelector(el);
+    selector.classList.remove("has-error");
+    selector.classList.add("has-success");
+  }
+
+  setNumberFormGroupToNormal(el) {
+    const selector = document.querySelector(el);
+    selector.classList.remove("has-error");
+    selector.classList.remove("has-success");
   }
 
   renderError(err) {
@@ -166,6 +171,18 @@ class BookingView {
       </section>`;
     this.clear();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
+
+  _hideAlert() {
+    const el = document.querySelector(".alert");
+    if (el) el.parentElement.removeChild(el);
+  }
+
+  showAlert(type, msg, time = 5) {
+    this._hideAlert();
+    const markup = `<div class="alert alert--${type}">${msg}</div>`;
+    document.querySelector("body").insertAdjacentHTML("afterbegin", markup);
+    window.setTimeout(this._hideAlert, time * 1000);
   }
 }
 

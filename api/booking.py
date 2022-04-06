@@ -17,7 +17,7 @@ def authenticate(func):
         user = mydbpool.find_one("user", {"email": decoded["email"]})
 
         if user:
-            return func(user)
+            return func(user, *args, **kwargs)
 
         return handle_error("You don't have permission.", 403)
 
@@ -72,7 +72,7 @@ class Booking(Resource):
             return handle_error()
 
     def delete(self, user):
-        is_delete = mydbpool.delete_one("booking", {"userId": user["id"]})
-        if is_delete:
+        is_deleted = mydbpool.delete_one("booking", {"userId": user["id"]})
+        if is_deleted:
             return jsonify({"ok": True})
         return handle_error()
