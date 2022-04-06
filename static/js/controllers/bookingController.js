@@ -151,8 +151,7 @@ const init = async () => {
     }
   } catch (err) {
     console.error(err);
-    // bookingView.renderError("伺服器內部錯誤，請稍後再試");
-    bookingView.renderError(err);
+    bookingView.renderError("伺服器內部錯誤，請稍後再試");
   }
 };
 
