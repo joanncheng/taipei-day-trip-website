@@ -9,7 +9,7 @@ const showAttractions = async () => {
     attractionsView.removeLoadingMessage();
     attractionsView.render(model.state.attractions);
   } catch (err) {
-    attractionsView.renderError(err);
+    throw err;
   }
 };
 
@@ -28,7 +28,6 @@ const controlLoadMore = async (entries, observer) => {
 
     await model.loadAttractions(model.state.nextPage, model.state.query);
     attractionsView.hideLoading();
-
     attractionsView.render(model.state.attractions);
 
     if (!model.state.nextPage) {
@@ -36,7 +35,7 @@ const controlLoadMore = async (entries, observer) => {
       attractionsView.removeLoading();
     }
   } catch (err) {
-    attractionsView.renderError(err);
+    attractionsView.renderError("伺服器內部錯誤，請稍後再試");
   }
 };
 
@@ -53,7 +52,7 @@ const controlSearchResults = async () => {
       attractionsView.addHandlerRender(controlLoadMore);
     }
   } catch (err) {
-    attractionsView.renderError(err);
+    attractionsView.renderError("伺服器內部錯誤，請稍後再試");
   }
 };
 

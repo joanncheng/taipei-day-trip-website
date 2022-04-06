@@ -10,11 +10,13 @@ const showThankyou = async () => {
 
     if (!number) {
       location.assign("/");
+      return;
     }
     await model.loadOrder(number);
 
     if (!model.state.order) {
       location.assign("/");
+      return;
     }
     thankyouView.removeLoadingMessage();
     thankyouView.render(model.state.user.name, model.state.order);
@@ -29,6 +31,7 @@ const init = async () => {
 
     if (!model.state.user) {
       location.assign("/");
+      return;
     }
     await showThankyou();
   } catch (err) {

@@ -1,4 +1,6 @@
-class AuthFormView {
+import View from "./View.js";
+
+class AuthFormView extends View {
   renderMessage(status, form) {
     const msgContainer = document.querySelector(`.form-${form} > div`);
 
@@ -59,19 +61,6 @@ class AuthFormView {
 
   addHandlerLogout(handler) {
     document.querySelector(".btn--logout").addEventListener("click", handler);
-  }
-
-  _hideAlert() {
-    const el = document.querySelector(".alert");
-    if (el) el.parentElement.removeChild(el);
-  }
-
-  // type is 'success' or 'error'
-  showAlert(type, msg, time = 5) {
-    this._hideAlert();
-    const markup = `<div class="alert alert--${type}">${msg}</div>`;
-    document.querySelector("body").insertAdjacentHTML("afterbegin", markup);
-    window.setTimeout(this._hideAlert, time * 1000);
   }
 }
 

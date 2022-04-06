@@ -95,4 +95,12 @@
   .main-container.thankyou {
     margin: 100px 10px;
   }
+
+  .thankyou__header {
+    font-size: 28px;
+  }
+
+  .thankyou__description {
+    font-size: 20px;
+  }
 }
