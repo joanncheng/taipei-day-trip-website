@@ -22,7 +22,7 @@ const controlDeleteBooking = async () => {
   }
 };
 
-const tappaySetup = () => {
+const setupTappay = () => {
   TPDirect.setupSDK(TPAPP_ID, TPAPP_KEY, TPAPP_ENV);
   const fields = {
     number: {
@@ -145,7 +145,7 @@ const init = async () => {
     await showBooking();
     if (model.state.booking !== null) {
       bookingView.addHandlerDeleteBooking(controlDeleteBooking);
-      tappaySetup();
+      setupTappay();
       bookingView.addHandlerTappayFields(controlTappayFields);
       bookingView.addHandlerFormSubmit(controlSubmit);
     }

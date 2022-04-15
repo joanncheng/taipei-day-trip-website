@@ -61,9 +61,9 @@ class Orders(Resource):
                 is_updated = mydbpool.update_one("orders", {"status": 0, "number": number})
                 is_deleted = mydbpool.delete_one("booking", {"userId": user["id"]})
                 if not is_updated or not is_deleted:
-                    return handle_error()
+                    return handle_error("Something went wrong, please contact us to comfirm payment result.", 500)
+
                 res = {"data": {"number": number, "payment": {"status": 0, "message": "付款成功"}}}
-                return jsonify(res)
             else:
                 res = {
                     "data": {
@@ -71,9 +71,11 @@ class Orders(Resource):
                         "payment": {"status": 1, "message": "付款失敗 (%s)" % (tappay_result["msg"])},
                     }
                 }
-                return jsonify(res)
+            return jsonify(res)
+
         except KeyError as e:
             return handle_error("Please provide valid data (%s)" % (str(e)), 400)
+
         except Exception as e:
             print("From POST api/orders: ", e)
             return handle_error()
