@@ -32,7 +32,6 @@ class ThankyouView {
       </table>
       <div class="thankyou__btn">
         <a class="btn" href="/">返回首頁</a>
-        <a class="btn btn--outline" href="#">查詢歷史訂單</a>
       </div>
     `;
   }
