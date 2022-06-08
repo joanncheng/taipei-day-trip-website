@@ -1,9 +1,7 @@
 # Taipei-day-trip-website
 
-![cover](/README_images/cover.png)
-
-Taipei-day-trip-website is a travel e-commerce website where you can discover and find attractions of Taipei City and book day tours of the sights you like.
-
+Taipei-day-trip-website is a travel e-commerce website where you can discover and find attractions in Taipei City and book day tours of the sights you like.
+![cover image](/README_images/cover.png)
 
 ## Table of Contents
 
@@ -35,38 +33,38 @@ Taipei-day-trip-website is a travel e-commerce website where you can discover an
 
 ## Tech Stack
 
-This project was built with vanilla javascript and python flask and developed following [Figma mockup](https://www.figma.com/file/CeFwqBSbNWZbWz2ih4YS6z) and [API documentation](https://app.swaggerhub.com/apis-docs/padax/taipei-trip/1.0.0) from [WeHelp Bootcamp](https://training.pada-x.com/wehelp/).
+This project was built with vanilla javascript and python flask and developed following [Figma mockup](https://www.figma.com/file/CeFwqBSbNWZbWz2ih4YS6z) and [API documentation](https://app.swaggerhub.com/apis-docs/padax/taipei-trip/1.0.0) designed by [WeHelp Bootcamp](https://training.pada-x.com/wehelp/).
 
-![tech-stack](/README_images/tech_stack.png)
+![tech stack](/README_images/tech_stack.png)
 
 
 ## Features
 
 ### Infinite Scroll/ Lazy Loading
 
-![lazy-loading-gif](/README_images/lazy_loading.gif)
+![image](/README_images/lazy_loading.gif)
 
 ### Keyword Search
 
-![Webp net-gifmaker](https://user-images.githubusercontent.com/75563062/132554588-2321fae5-9498-4054-b85f-89f852a84f8d.gif)
+![image](/README_images/keyword_search.gif)
 
 ### Member System
 
-![Webp net-gifmaker](https://user-images.githubusercontent.com/75563062/132558639-d99d94e8-c721-4b8f-8a76-ac599e217403.gif)
+![image](/README_images/member_signin.gif)
 
 ### Image carousel/ Slideshow
 
-![Webp net-gifmaker](https://user-images.githubusercontent.com/75563062/132563234-e3b01592-19ff-42bf-b594-1642566e4195.gif)
+![image](/README_images/carousel.gif)
 
 ### Shopping cart & third party online payment ([TapPay](https://www.tappaysdk.com/zh/))
 
-![Webp net-gifmaker](https://user-images.githubusercontent.com/75563062/132576098-d22d022f-5784-48c6-9328-078186d2b703.gif)
+![image](/README_images/shopping_cart.gif)
 
 ### Responsive Web Design (RWD)
 
-![Webp net-gifmaker](https://user-images.githubusercontent.com/75563062/132567529-a7c5d10e-f7b1-4804-a102-7605b93fa721.gif)
+![image](/README_images/RWD.gif)
 
 ## Database Schema
 
-![Webp net-gifmaker](https://user-images.githubusercontent.com/75563062/132567529-a7c5d10e-f7b1-4804-a102-7605b93fa721.gif)
+![image](/README_images/database_schema.png)
 
