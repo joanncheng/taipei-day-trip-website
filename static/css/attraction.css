@@ -141,7 +141,7 @@
 
 .booking__date {
   padding: 5px 10px;
-  width: 193px;
+  width: 185px;
   height: 35px;
   border: none;
   background-color: #ffffff;
@@ -155,6 +155,8 @@
 input[type="date"]::-webkit-calendar-picker-indicator {
   background: url("../img/icon/calendar.svg") no-repeat;
   cursor: pointer;
+  width: 15%;
+  height: 100%;
 }
 
 .form__item .radio-container {
