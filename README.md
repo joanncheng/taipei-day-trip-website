@@ -1,7 +1,17 @@
 # Taipei-day-trip-website
 
-Taipei-day-trip-website is a travel e-commerce website where you can discover and find attractions in Taipei City and book day tours of the sights you like.
-![image](https://i.imgur.com/l3EbwJU.png)
+<div align="center">
+  <img width="800" src="https://i.imgur.com/l3EbwJU.png" alt="hero image"/>
+</div>  
+
+
+<h3 align="center">
+Taipei-day-trip-website is a travel e-commerce website</br> 
+where you can discover and find attractions in Taipei City</br> and book day tours of the sights you like.  
+</h3>
+
+
+
 
 ## Table of Contents
 
