@@ -1,7 +1,7 @@
 # Taipei-day-trip-website
 
 Taipei-day-trip-website is a travel e-commerce website where you can discover and find attractions in Taipei City and book day tours of the sights you like.
-![cover image](/README_images/cover.png)
+![image](https://i.imgur.com/l3EbwJU.png)
 
 ## Table of Contents
 
@@ -35,36 +35,36 @@ Taipei-day-trip-website is a travel e-commerce website where you can discover an
 
 This project was built with vanilla javascript and python flask and developed following [Figma mockup](https://www.figma.com/file/CeFwqBSbNWZbWz2ih4YS6z) and [API documentation](https://app.swaggerhub.com/apis-docs/padax/taipei-trip/1.0.0) designed by [WeHelp Bootcamp](https://training.pada-x.com/wehelp/).
 
-![tech stack](/README_images/tech_stack.png)
+![tech stack](https://i.imgur.com/lbxqT78.png)
 
 
 ## Features
 
 ### Infinite Scroll/ Lazy Loading
 
-![image](/README_images/lazy_loading.gif)
+![image](https://i.imgur.com/x6rN4uq.gif)
 
 ### Keyword Search
 
-![image](/README_images/keyword_search.gif)
+![image](https://i.imgur.com/sXs1LKD.gif)
 
 ### Member System
 
-![image](/README_images/member_signin.gif)
+![image](https://i.imgur.com/GvRCi1g.gif)
 
 ### Image carousel/ Slideshow
 
-![image](/README_images/carousel.gif)
+![image](https://i.imgur.com/SOrBn4Y.gif)
 
 ### Shopping cart & third party online payment ([TapPay](https://www.tappaysdk.com/zh/))
 
-![image](/README_images/shopping_cart.gif)
+![image](https://i.imgur.com/ZX4OXET.gif)
 
 ### Responsive Web Design (RWD)
 
-![image](/README_images/RWD.gif)
+![image](https://i.imgur.com/nAg56IZ.gif)
 
 ## Database Schema
 
-![image](/README_images/database_schema.png)
+![image](https://i.imgur.com/iIQJ8Pv.png)
 
