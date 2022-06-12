@@ -7,7 +7,7 @@
 
 <h3 align="center">
 Taipei-day-trip-website is a travel e-commerce website</br> 
-where you can discover and find attractions in Taipei City</br> and book day tours of the sights you like.  
+where you can discover and find attractions in Taipei City</br> and book day tours of the sights.  
 </h3>
 
 
@@ -44,8 +44,9 @@ where you can discover and find attractions in Taipei City</br> and book day tou
 ## Tech Stack
 
 This project was built with vanilla javascript and python flask and developed following [Figma mockup](https://www.figma.com/file/CeFwqBSbNWZbWz2ih4YS6z) and [API documentation](https://app.swaggerhub.com/apis-docs/padax/taipei-trip/1.0.0) designed by [WeHelp Bootcamp](https://training.pada-x.com/wehelp/).
-
-![tech stack](https://i.imgur.com/lbxqT78.png)
+<div>
+  <img width="800" src="https://i.imgur.com/PQ7njnG.png" alt="teck stack"/>
+</div>
 
 
 ## Features
