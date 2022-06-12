@@ -73,7 +73,7 @@ This project was built with vanilla javascript and python flask and developed fo
 
 ### Responsive Web Design (RWD)
 
-![image](https://i.imgur.com/nAg56IZ.gif)
+![image](https://i.imgur.com/QdNIGG8.gif)
 
 ## Database Schema
 
