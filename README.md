@@ -16,7 +16,7 @@ where you can discover and find attractions in Taipei City</br> and book day tou
 ## Table of Contents
 
 - [Live Demo](#live-demo)
-- [Tech Stack](#tech-stack)
+- [Technique](#technique)
 - [Features](#features)
   - [Infinite Scroll](#infinite-scroll-lazy-loading)
   - [Keyword Search](#keyword-search)
@@ -41,7 +41,7 @@ where you can discover and find attractions in Taipei City</br> and book day tou
 * valid Date: 01 / 23
 * CVV: 123
 
-## Tech Stack
+## Technique
 
 This project was built with vanilla javascript and python flask and developed following [Figma mockup](https://www.figma.com/file/CeFwqBSbNWZbWz2ih4YS6z) and [API documentation](https://app.swaggerhub.com/apis-docs/padax/taipei-trip/1.0.0) designed by [WeHelp Bootcamp](https://training.pada-x.com/wehelp/).
 <div>
