@@ -43,10 +43,14 @@ where you can discover and find attractions in Taipei City</br> and book day tou
 
 ## Technique
 
-This project was built with vanilla javascript and python flask and developed following [Figma mockup](https://www.figma.com/file/CeFwqBSbNWZbWz2ih4YS6z) and [API documentation](https://app.swaggerhub.com/apis-docs/padax/taipei-trip/1.0.0) designed by [WeHelp Bootcamp](https://training.pada-x.com/wehelp/).
+This project was built with vanilla javascript and python flask and developed following Figma mockup and API documentation designed by [WeHelp Bootcamp](https://training.pada-x.com/wehelp/).
 <div>
   <img width="800" src="https://i.imgur.com/PQ7njnG.png" alt="teck stack"/>
 </div>
+<div>
+  <img width="800" src="https://i.imgur.com/aIsWh2R.png" alt="API documentation"/>
+</div>
+
 
 
 ## Features
