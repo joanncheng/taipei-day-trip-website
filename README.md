@@ -24,7 +24,6 @@ where you can discover and find attractions in Taipei City</br> and book day tou
   - [Image carousel/ Slideshow](#image-carousel-slideshow)
   - [Shopping cart & third party online payment (TapPay)](#shopping-cart--third-party-online-payment-tappay)
   - [Responsive Web Design](#responsive-web-design-rwd)
-- [Database Schema](#database-schema)
 
 ## Live Demo
 
@@ -78,8 +77,4 @@ This project was built with vanilla javascript and python flask and developed fo
 ### Responsive Web Design (RWD)
 
 ![image](https://i.imgur.com/QdNIGG8.gif)
-
-## Database Schema
-
-![image](https://i.imgur.com/iIQJ8Pv.png)
 
