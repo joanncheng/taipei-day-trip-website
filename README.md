@@ -27,7 +27,7 @@ where you can discover and find attractions in Taipei City</br> and book day tou
 
 ## Live Demo
 
-### [Taipei day trip website](http://52.37.246.45:3000/)
+~~http://52.37.246.45:3000/~~
 
 #### Test Account
 
